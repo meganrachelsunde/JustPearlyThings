@@ -18,7 +18,23 @@ An inventory of every channel, property, and revenue stream in the JustPearlyThi
 | iOS app "The Audacity Network" | Live | Uscreen white-label app (`tv.uscreen.theaudacitynetwork`), in-app subscriptions via Apple | Mobile access to the membership |
 | Android app | Live (updated Oct 2025) | Same Uscreen white-label app, Google Play billing | Mobile access to the membership |
 
-Note: `theaudacitynetwork.com/email` is linked in current video descriptions as "Join Our Emailing List," but fetching it returns the same generic landing-page content as the homepage (donation and subscribe CTAs) with no visible signup form. Whether a working email-capture form exists there needs to be verified in a real browser — see open questions in [05-roadmap.md](05-roadmap.md).
+Notes:
+
+- `theaudacitynetwork.com` also hosts an [About Pearl Davis page](https://www.theaudacitynetwork.com/about) — currently the only owned bio/press surface for her name.
+- `theaudacitynetwork.com/email` is linked in current video descriptions as "Join Our Emailing List," but fetching it returns the same generic landing-page content as the homepage (donation and subscribe CTAs) with no visible signup form. Whether a working email-capture form exists there needs to be verified in a real browser — see open questions in [05-roadmap.md](05-roadmap.md).
+
+### Name-brand domain landscape (checked July 2026)
+
+There is no website under her own name or the JustPearlyThings brand:
+
+| Domain | Status |
+|---|---|
+| `justpearlythings.com` | No DNS records — unregistered or registered-but-unused |
+| `justpearlythings.net` / `.org` | Resolve to domain-parking infrastructure, no real site |
+| `pearldavis.com` | Parked and listed for sale at $3,488 (Spaceship) — held by a reseller |
+| `hannahpearldavis.com` | No DNS records — likely unregistered |
+
+Searches for "JustPearlyThings" or "Pearl Davis" therefore land exclusively on third-party properties (YouTube, Wikipedia, critics).
 
 ## Rented (third-party) channels
 
