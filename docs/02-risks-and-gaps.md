@@ -47,7 +47,7 @@ With ~2M YouTube subscribers as top-of-funnel, even a 1–2% conversion to an ow
 ### 5. Funnel decay and brand-domain vacancy
 
 - `theaudacitynetwork.store` and `audacitymerch.com` are dead domains still linked from hundreds of old episode descriptions. Every click is lost revenue, and expired domains previously associated with the brand can be re-registered by squatters or bad actors.
-- `justpearlythings.com` is held by a third party and serves nothing. The name people actually search for has no owned landing page; search results for the brand are entirely third-party (Wikipedia, YouTube, critics). Mitigation in progress: `hannahpearldavis.com` was registered July 2026 as the hub domain.
+- `justpearlythings.com` served nothing until it was purchased for this project in July 2026 (with `hannahpearldavis.com` registered as a defensive redirect). Until the hub ships there, search results for the brand remain entirely third-party (Wikipedia, YouTube, critics).
 
 ### 6. Discoverability and content ownership
 
