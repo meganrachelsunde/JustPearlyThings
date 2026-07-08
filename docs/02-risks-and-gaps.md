@@ -53,7 +53,11 @@ With ~2M YouTube subscribers as top-of-funnel, even a 1–2% conversion to an ow
 
 Full episodes live behind the Uscreen paywall or on YouTube/Rumble. There is no owned, indexable archive of her catalog — no episode pages, transcripts, or show notes on a domain she controls. If YouTube removed the channel (not just demonetized it), years of free-tier content and its search presence would vanish with it.
 
-### 7. Single-person operational risk
+### 7. Legal exposure (added from Pearl's own account)
+
+By her own description she faces "endless lawsuits" and recurring court actions, with donations partly earmarked for legal defense. Two platform implications: (a) cash flow needs to be resilient (reinforces the processor-fallback and annual-plan points above), and (b) if donations are solicited for legal defense or routed through a nonprofit, the entity structure and messaging must be accurate — see the nonprofit questions in [06-pearls-stated-priorities.md](06-pearls-stated-priorities.md). Her serial account bans (by her count, nine TikTok accounts and three Instagrams) also confirm that any single social account is disposable — the email list and hub domain are the only stable addresses.
+
+### 8. Single-person operational risk
 
 Domains, Stripe, Uscreen, app store accounts, and social logins presumably hang off a small set of personal accounts. Standard small-business hygiene applies: registrar consolidation and lock, 2FA, shared credential vault, and a written inventory of what exists (which [01-current-footprint.md](01-current-footprint.md) starts).
 

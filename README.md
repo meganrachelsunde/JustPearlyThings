@@ -27,6 +27,7 @@ Hold a Ghost migration and any new community product in reserve; don't build a c
 | [docs/03-platform-options.md](docs/03-platform-options.md) | Uscreen vs. Ghost vs. custom; email, community, hosting, and payments options |
 | [docs/04-what-to-build.md](docs/04-what-to-build.md) | The five ranked build projects with scope and dependencies |
 | [docs/05-roadmap.md](docs/05-roadmap.md) | Phased sequencing, what Pearl must provide, open questions for her |
+| [docs/06-pearls-stated-priorities.md](docs/06-pearls-stated-priorities.md) | Pearl's own requirements from her video: feature wishlist, nonprofit plans, legal exposure |
 
 ## Next step
 

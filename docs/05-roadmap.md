@@ -73,6 +73,9 @@ No action. Criteria to reopen: Uscreen termination or major policy/pricing chang
 5. Does she have any existing email sending history (e.g., Uscreen broadcasts)? This affects list-import consent and deliverability warm-up.
 6. Who besides Pearl has admin access to Uscreen/Stripe/domains today? (Feeds the ops-hygiene runbook.)
 7. Appetite check on the Ghost escape route: does she want the migration plan fleshed out now (paper exercise only), or is documenting the trigger criteria enough?
+8. From her video (see [06-pearls-stated-priorities.md](06-pearls-stated-priorities.md)): which site is "the independent website we just got done," and who built/hosts it?
+9. Nonprofit structure: is her nonprofit incorporated (501(c)(3) status?), what's its name, and which donations route to it vs. the LLC vs. Terrence Moore's nonprofit? (Needs her accountant/attorney — affects donation page wording.)
+10. What does the planned "monthly event" look like (livestream, in-person, ticketed)? Determines the events feature's scope.
 
 ## Success measures
 

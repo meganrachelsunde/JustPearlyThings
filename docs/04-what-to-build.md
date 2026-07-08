@@ -11,6 +11,7 @@ The direct answer to "what can I build for Pearl?" Five projects, ranked by valu
 - "Latest" section: newest episodes pulled at build time from her YouTube/Rumble/podcast RSS feeds — no CMS, no manual updates.
 - Links block replacing the linktree-style scatter: all socials, apps, podcast platforms, donation rails (Cash App/Venmo/crypto presented properly instead of pasted into descriptions), GoFundMe.
 - About/press page — currently the top search results for her name are entirely third-party.
+- Pearl's own requested features (see [06-pearls-stated-priorities.md](06-pearls-stated-priorities.md)): donation transparency section ("where the money goes"), monthly-events section, a blog, resources-for-fathers page, statistics-with-sources page, a section for Terrence's video series, and a mission video in the hero.
 
 **Build:** Astro or Next.js (static export), Tailwind, deployed on Cloudflare Pages. A scheduled rebuild (daily cron) keeps the "Latest" feed fresh with zero backend. This entire project fits in this repo.
 
