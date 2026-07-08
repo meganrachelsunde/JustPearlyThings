@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JustPearlyThings — Clip & Statement Risk Assessor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#F4F5F7; --card:#FFFFFF; --card-2:#F1F3F6;
+    --line:#E6E9ED; --line-soft:#EEF0F3;
+    --signal:#1A56DB; --signal-dim:rgba(26,86,219,.09);
+    --text:#0F0F12; --dim:#4F5867; --faint:#606A78;
+    --good:#1A7F37; --gold:#9A6A0E; --orange:#C2410C; --warn:#C5221F;
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 4px 14px rgba(15,23,42,.06);
+    --shadow-sm:0 1px 3px rgba(15,23,42,.05);
+    --r:16px; --disp:'Roboto',sans-serif; --mono:'Roboto Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--page); color:var(--text); font-family:var(--disp); font-size:16.5px; line-height:1.68; -webkit-font-smoothing:antialiased}
+  ::selection{background:var(--signal); color:#fff}
+  .wrap{max-width:1000px; margin:0 auto; padding:40px 28px 100px}
+
+  .brand{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+  .brand b{color:var(--signal)}
+  h1{font-weight:900; font-size:clamp(28px,4.5vw,42px); line-height:1.08; letter-spacing:-.02em; margin:14px 0 12px}
+  .lede{font-size:18px; color:var(--dim); max-width:64ch; line-height:1.6}
+
+  .disclaimer{background:#FFF8EC; border:1px solid #F2E2BE; border-left:4px solid var(--gold); border-radius:0 var(--r) var(--r) 0; box-shadow:var(--shadow-sm); padding:16px 20px; margin:26px 0; font-size:14px; line-height:1.6; color:#5C4A1E}
+  .disclaimer b{color:#3F3414}
+
+  .modebar{display:inline-flex; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:5px; box-shadow:var(--shadow-sm); margin:8px 0 24px; gap:4px}
+  .modebar button{font-family:var(--disp); font-weight:500; font-size:14.5px; padding:10px 20px; border:none; background:transparent; color:var(--dim); border-radius:9px; cursor:pointer; transition:all .15s}
+  .modebar button.on{background:var(--signal); color:#fff; box-shadow:var(--shadow-sm)}
+  .mode-sub{color:var(--dim); font-size:15px; margin:-12px 0 26px; max-width:62ch}
+
+  .grid{display:grid; grid-template-columns:1fr 320px; gap:22px; align-items:start}
+
+  .factors{background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
+  .factor{padding:18px 22px; border-bottom:1px solid var(--line-soft)}
+  .factor:last-child{border-bottom:none}
+  .factor.fired{background:linear-gradient(90deg,rgba(197,34,31,.035),transparent 60%)}
+  .ftop{display:flex; justify-content:space-between; align-items:flex-start; gap:14px}
+  .fname{font-weight:700; font-size:15.5px; line-height:1.3}
+  .fnote{font-size:13px; color:var(--faint); margin-top:5px; line-height:1.5; max-width:46ch}
+  .seg{display:inline-flex; background:var(--card-2); border-radius:9px; padding:3px; gap:2px; flex-shrink:0}
+  .seg button{font-family:var(--mono); font-size:11.5px; padding:7px 13px; border:none; background:transparent; color:var(--faint); border-radius:7px; cursor:pointer; transition:all .12s; white-space:nowrap}
+  .seg button[data-v="0"].on{background:var(--good); color:#fff}
+  .seg button[data-v="1"].on{background:var(--gold); color:#fff}
+  .seg button[data-v="2"].on{background:var(--warn); color:#fff}
+
+  .readout{position:sticky; top:20px; background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
+  .ro-top{padding:24px 24px 20px; text-align:center; border-bottom:1px solid var(--line-soft)}
+  .ro-label{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+  .ro-score{font-weight:900; font-size:60px; line-height:1; letter-spacing:-.03em; margin:8px 0 4px; transition:color .2s}
+  .ro-score small{font-size:22px; color:var(--faint); font-weight:400}
+  .ro-tier{display:inline-block; font-family:var(--mono); font-size:12px; padding:6px 14px; border-radius:8px; letter-spacing:.03em; transition:all .2s}
+  .ro-action{padding:18px 22px; font-size:14px; line-height:1.55; color:var(--dim); border-bottom:1px solid var(--line-soft)}
+  .ro-action b{color:var(--text)}
+  .fired-list{padding:16px 22px 20px}
+  .fired-list .fl-h{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-bottom:10px}
+  .fl-item{padding:11px 0; border-bottom:1px solid var(--line-soft); font-size:13px; line-height:1.5}
+  .fl-item:last-child{border-bottom:none}
+  .fl-item .fl-name{font-weight:700; display:flex; align-items:center; gap:8px}
+  .fl-sev{font-family:var(--mono); font-size:9.5px; padding:2px 6px; border-radius:4px; text-transform:uppercase}
+  .fl-sev.some{background:rgba(154,106,14,.12); color:var(--gold)}
+  .fl-sev.high{background:rgba(197,34,31,.11); color:var(--warn)}
+  .fl-fix{color:var(--dim); margin-top:4px}
+  .fl-fix b{color:var(--orange)}
+  .fl-empty{font-size:13.5px; color:var(--good); line-height:1.5}
+
+  .foot{margin-top:32px; padding-top:22px; border-top:1px solid var(--line); color:var(--faint); font-size:12.5px; line-height:1.6; font-family:var(--mono)}
+  .foot b{color:var(--signal)}
+
+  /* ---- pipeline result bridge ---- */
+  .loadbar{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:0 0 24px}
+  .loadbtn{font-family:var(--disp); font-weight:500; font-size:14px; padding:10px 16px; border:1px solid var(--signal); color:var(--signal); background:var(--signal-dim); border-radius:10px; cursor:pointer; transition:all .15s}
+  .loadbtn:hover{background:var(--signal); color:#fff}
+  .loadhint{font-size:13px; color:var(--faint)}
+  .loadhint code{font-family:var(--mono); font-size:12px; background:var(--card-2); padding:2px 6px; border-radius:5px; color:var(--dim)}
+  .results{display:flex; flex-direction:column; gap:18px; margin-bottom:8px}
+  .results-head{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap}
+  .results-src{font-family:var(--mono); font-size:12px; color:var(--faint)}
+  .results-src b{color:var(--signal)}
+  .backbtn{font-family:var(--mono); font-size:12px; padding:7px 13px; border:1px solid var(--line); background:var(--card); color:var(--dim); border-radius:8px; cursor:pointer}
+  .backbtn:hover{border-color:var(--signal); color:var(--text)}
+  .rcard{background:var(--card); border:1px solid var(--line-soft); border-radius:var(--r); box-shadow:var(--shadow); overflow:hidden}
+  .rcard-top{display:flex; align-items:center; gap:20px; padding:22px 26px; border-bottom:1px solid var(--line-soft); flex-wrap:wrap}
+  .rcard-mode{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+  .rcard-score{font-weight:900; font-size:46px; line-height:1; letter-spacing:-.03em}
+  .rcard-score small{font-size:18px; color:var(--faint); font-weight:400}
+  .rcard-tier{font-family:var(--mono); font-size:13px; padding:7px 15px; border-radius:8px}
+  .rcard-action{padding:16px 26px; font-size:14.5px; line-height:1.55; color:var(--dim); border-bottom:1px solid var(--line-soft)}
+  .rcard-action b{color:var(--text)}
+  .rcard-fired{padding:8px 26px 22px}
+  .rcard-fired .fl-h{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin:12px 0 4px}
+  .rf-item{padding:13px 0; border-bottom:1px solid var(--line-soft)}
+  .rf-item:last-child{border-bottom:none}
+  .rf-name{font-weight:700; font-size:14.5px; display:flex; align-items:center; gap:9px}
+  .rf-ev{font-size:13px; color:var(--dim); margin-top:5px; padding-left:12px; border-left:2px solid var(--line)}
+  .rf-fix{font-size:13px; color:var(--dim); margin-top:6px}
+  .rf-fix b{color:var(--orange)}
+  .rcard-clear{padding:18px 26px 24px; font-size:14.5px; color:var(--good)}
+
+  @media(max-width:860px){
+    .grid{grid-template-columns:1fr}
+    .readout{position:static}
+    .ftop{flex-direction:column}
+    .seg{align-self:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><b>prettyunknown.</b> / analyst layer</div>
+  <h1>Clip &amp; Statement Risk Assessor</h1>
+  <p class="lede">A pre-publish triage instrument for JustPearlyThings. It surfaces where a cut — or a thing said on camera — carries legal or reputational exposure, before it ships. Two modes, one discipline: see it coming.</p>
+
+  <div class="disclaimer">
+    <b>This is a triage aid, not legal advice.</b> It structures judgment and flags exposure for a human to weigh — it does not determine liability, and it isn't a substitute for an attorney. For anything that scores into <b>Hold</b> or <b>Escalate</b>, route it to qualified counsel before publishing.
+  </div>
+
+  <div class="loadbar">
+    <label class="loadbtn"><input type="file" id="resultFile" accept=".json,application/json" hidden>📂 Load pipeline result</label>
+    <span class="loadhint" id="loadHint">Run <code>pearl_clip_risk.py</code>, then drop its <code>clip_risk.json</code> here to see the scored card.</span>
+  </div>
+
+  <section id="results" class="results" hidden></section>
+
+  <div id="manual">
+    <div class="modebar" id="modebar">
+      <button data-mode="clip" class="on">Clip Risk</button>
+      <button data-mode="statement">Statement Risk</button>
+    </div>
+    <p class="mode-sub" id="modeSub"></p>
+
+    <div class="grid">
+      <div class="factors" id="factors"></div>
+      <div class="readout">
+        <div class="ro-top">
+          <div class="ro-label">Exposure score</div>
+          <div class="ro-score" id="score">0<small>/100</small></div>
+          <span class="ro-tier" id="tier">Clear</span>
+        </div>
+        <div class="ro-action" id="action"></div>
+        <div class="fired-list">
+          <div class="fl-h">What fired</div>
+          <div id="firedList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>prettyunknown.</b> risk assessor · weights reflect defamation &amp; platform-policy exposure, not certainty · a "High" on any minor-related factor forces an Escalate regardless of total · built to be argued with, not obeyed.
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // value scale per factor: 0 = none, 1 = some, 2 = high
+  var MODES = {
+    clip: {
+      sub: "Scoring a finished cut before it publishes — does this clip, as edited, create legal or reputational exposure?",
+      factors: [
+        {key:'context', name:'Out-of-context distortion', w:5,
+          note:"Does the cut change what the speaker actually meant by removing the surrounding exchange?",
+          fix:"Extend the clip to include the context, or add a context card."},
+        {key:'defame', name:'Damaging factual claim about a named person', w:5,
+          note:"Does it present as fact something damaging about an identifiable real person? Opinion is protected; false facts are not.",
+          fix:"Verify the claim is true and documented, or cut the assertion."},
+        {key:'private', name:'Targets a private individual', w:4,
+          note:"Private people have far stronger legal claims than public figures. Is the subject non-public?",
+          fix:"Blur/anonymize, or drop the identifying detail."},
+        {key:'brand', name:'Brand / advertiser safety', w:3,
+          note:"Slurs, graphic, sexual, or hate-adjacent content repels sponsors and triggers demonetization.",
+          fix:"Trim the unsafe beat or flag the upload as limited-ads expected."},
+        {key:'policy', name:'Platform-policy proximity', w:4,
+          note:"Brushes community guidelines — harassment, hate, medical/election misinformation. Strike or removal risk.",
+          fix:"Reframe or cut; a strike costs the whole channel, not one video."},
+        {key:'copyright', name:'Third-party copyright', w:2,
+          note:"Unlicensed music, footage, or clips in the cut invite claims, takedowns, and demonetization.",
+          fix:"Swap to licensed/library audio; clear or remove third-party footage."},
+        {key:'privacy', name:'Privacy / consent / doxxing', w:3,
+          note:"Identifying private facts or location, or a person who didn't know they were filmed.",
+          fix:"Remove identifying info; confirm consent for private settings."},
+        {key:'minor', name:'Involves a minor', w:5, override:true,
+          note:"Any sensitive depiction or discussion of someone under 18. This forces a stop regardless of total.",
+          fix:"Do not publish without explicit review. When in doubt, cut it."}
+      ]
+    },
+    statement: {
+      sub: "Scoring something Pearl says on camera — does this statement carry exposure the team should see coming?",
+      factors: [
+        {key:'assert', name:'Factual assertion about a named person', w:5,
+          note:"States as fact something about an identifiable person. The core defamation seed — opinion is safe, fact is the risk.",
+          fix:"Confirm it's verifiably true, or frame explicitly as opinion."},
+        {key:'false', name:'Unverifiable or provably false as stated', w:4,
+          note:"Truth is a defense. A factual claim that can't be backed is exposure.",
+          fix:"Source it, soften to opinion, or don't surface the clip."},
+        {key:'priv', name:'Targets a private individual', w:4,
+          note:"A private person, not a public figure, alleged against. Far lower bar for a claim.",
+          fix:"Anonymize or avoid surfacing as a standalone clip."},
+        {key:'perse', name:'Alleges crime / professional misconduct / dishonesty', w:5,
+          note:"These categories can be defamation 'per se' — harm is presumed without proof of damages.",
+          fix:"Route to counsel before this becomes a published clip."},
+        {key:'hate', name:'Hate-policy / protected-class proximity', w:4,
+          note:"Statement brushes platform hate policy — demonetization or strike exposure even if legally defensible.",
+          fix:"Don't isolate it as a clip; context-bury or skip."},
+        {key:'incite', name:'Directs the audience at a person', w:4,
+          note:"Names a target and points the audience at them — harassment direction draws platform action and claims.",
+          fix:"Never clip the call-out beat; it's the highest-liability moment."},
+        {key:'advice', name:'Advice stated as fact (medical/legal/financial)', w:2,
+          note:"Definitive advice the audience could rely on carries its own liability tail.",
+          fix:"Keep the hedge/disclaimer in the cut."},
+        {key:'walkback', name:'Hard to walk back', w:2,
+          note:"Some statements can't be re-contextualized after the fact. Is this one of them?",
+          fix:"Weigh whether the reach is worth an un-retractable position."}
+      ]
+    }
+  };
+
+  var current = 'clip';
+  var state = {clip:{}, statement:{}};
+
+  var factorsEl = document.getElementById('factors');
+  var modeSub = document.getElementById('modeSub');
+
+  function buildFactors(){
+    var m = MODES[current];
+    modeSub.textContent = m.sub;
+    factorsEl.innerHTML = '';
+    m.factors.forEach(function(f){
+      var v = state[current][f.key] || 0;
+      var wrap = document.createElement('div');
+      wrap.className = 'factor';
+      wrap.id = 'fac-' + f.key;
+      wrap.innerHTML =
+        '<div class="ftop"><div><div class="fname">'+f.name+'</div>'+
+        '<div class="fnote">'+f.note+'</div></div>'+
+        '<div class="seg">'+
+          '<button data-v="0" '+(v===0?'class="on"':'')+'>None</button>'+
+          '<button data-v="1" '+(v===1?'class="on"':'')+'>Some</button>'+
+          '<button data-v="2" '+(v===2?'class="on"':'')+'>High</button>'+
+        '</div></div>';
+      wrap.querySelectorAll('.seg button').forEach(function(b){
+        b.addEventListener('click', function(){
+          state[current][f.key] = +b.getAttribute('data-v');
+          buildFactors(); render();
+        });
+      });
+      factorsEl.appendChild(wrap);
+    });
+  }
+
+  var scoreEl=document.getElementById('score'),
+      tierEl=document.getElementById('tier'),
+      actionEl=document.getElementById('action'),
+      firedEl=document.getElementById('firedList');
+
+  function tierFor(pct, overrideHit){
+    if(overrideHit) return {n:'Escalate', c:'var(--warn)', bg:'rgba(197,34,31,.11)',
+      action:"<b>Stop.</b> A minor-related factor is flagged High. Nothing publishes without explicit human review."};
+    if(pct>=75) return {n:'Escalate', c:'var(--warn)', bg:'rgba(197,34,31,.11)',
+      action:"<b>Stop.</b> This needs reputational or legal review before any version goes out."};
+    if(pct>=50) return {n:'Hold', c:'var(--orange)', bg:'rgba(194,65,12,.11)',
+      action:"<b>Don't publish on autopilot.</b> A second set of eyes, or restructure to lower the flagged factors first."};
+    if(pct>=25) return {n:'Caution', c:'var(--gold)', bg:'rgba(154,106,14,.12)',
+      action:"<b>Publishable with a fix.</b> Apply the mitigations below before it ships."};
+    return {n:'Clear', c:'var(--good)', bg:'rgba(26,127,55,.12)',
+      action:"<b>Cut and publish on the normal track.</b> No material exposure surfaced."};
+  }
+
+  function render(){
+    var m = MODES[current], raw=0, max=0, fired=[], overrideHit=false;
+    m.factors.forEach(function(f){
+      var v = state[current][f.key] || 0;
+      raw += f.w * v; max += f.w * 2;
+      var fac = document.getElementById('fac-'+f.key);
+      if(fac) fac.classList.toggle('fired', v>=1);
+      if(v>=1) fired.push({f:f, v:v});
+      if(f.override && v===2) overrideHit = true;
+    });
+    var pct = max ? Math.round(raw/max*100) : 0;
+    var t = tierFor(pct, overrideHit);
+
+    scoreEl.innerHTML = pct + '<small>/100</small>';
+    scoreEl.style.color = t.c;
+    tierEl.textContent = t.n;
+    tierEl.style.color = t.c;
+    tierEl.style.background = t.bg;
+    actionEl.innerHTML = t.action;
+
+    fired.sort(function(a,b){ return b.v - a.v; });
+    if(!fired.length){
+      firedEl.innerHTML = '<div class="fl-empty">Nothing flagged yet. Set the factors that apply to this clip or statement.</div>';
+      return;
+    }
+    firedEl.innerHTML = fired.map(function(x){
+      var sev = x.v===2 ? '<span class="fl-sev high">High</span>' : '<span class="fl-sev some">Some</span>';
+      return '<div class="fl-item"><div class="fl-name">'+x.f.name+' '+sev+'</div>'+
+             '<div class="fl-fix"><b>Fix:</b> '+x.f.fix+'</div></div>';
+    }).join('');
+  }
+
+  document.querySelectorAll('#modebar button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#modebar button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      current = b.getAttribute('data-mode');
+      buildFactors(); render();
+    });
+  });
+
+  buildFactors(); render();
+
+  /* ---- pipeline result bridge: load clip_risk.json -> scored cards ---- */
+  var TIER_STYLE = {
+    "Clear":   {c:'var(--good)',   bg:'rgba(26,127,55,.12)'},
+    "Caution": {c:'var(--gold)',   bg:'rgba(154,106,14,.12)'},
+    "Hold":    {c:'var(--orange)', bg:'rgba(194,65,12,.11)'},
+    "Escalate":{c:'var(--warn)',   bg:'rgba(197,34,31,.11)'}
+  };
+  var SEV_WORD = {1:'Some', 2:'High'};
+
+  var resultsEl = document.getElementById('results');
+  var manualEl = document.getElementById('manual');
+  var loadHint = document.getElementById('loadHint');
+
+  function esc(s){ return String(s||'').replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function renderResults(data, fname){
+    var modes = Object.keys(data).filter(function(k){ return data[k] && typeof data[k].score === 'number'; });
+    if(!modes.length){ loadHint.textContent = "That file didn't look like a pipeline result."; return; }
+
+    var html = '<div class="results-head"><div class="results-src">loaded from <b>'+esc(fname)+'</b></div>'+
+               '<button class="backbtn" id="backManual">← Score manually instead</button></div>';
+
+    modes.forEach(function(m){
+      var r = data[m];
+      var ts = TIER_STYLE[r.tier] || TIER_STYLE["Clear"];
+      html += '<div class="rcard">'+
+        '<div class="rcard-top">'+
+          '<div><div class="rcard-mode">'+esc(m)+' risk</div>'+
+          '<div class="rcard-score" style="color:'+ts.c+'">'+r.score+'<small>/100</small></div></div>'+
+          '<span class="rcard-tier" style="color:'+ts.c+';background:'+ts.bg+'">'+esc(r.tier)+'</span>'+
+        '</div>'+
+        '<div class="rcard-action">'+ (r.action||'') +'</div>';
+
+      if(r.fired && r.fired.length){
+        html += '<div class="rcard-fired"><div class="fl-h">What fired</div>';
+        r.fired.forEach(function(f){
+          var sev = f.severity===2
+            ? '<span class="fl-sev high">High</span>'
+            : '<span class="fl-sev some">Some</span>';
+          html += '<div class="rf-item"><div class="rf-name">'+esc(f.name)+' '+sev+'</div>'+
+            (f.evidence ? '<div class="rf-ev">'+esc(f.evidence)+'</div>' : '')+
+            '<div class="rf-fix"><b>Fix:</b> '+esc(f.fix)+'</div></div>';
+        });
+        html += '</div>';
+      } else {
+        html += '<div class="rcard-clear">Nothing flagged — clear on this axis.</div>';
+      }
+      html += '</div>';
+    });
+
+    resultsEl.innerHTML = html;
+    resultsEl.hidden = false;
+    manualEl.hidden = true;
+    document.getElementById('backManual').addEventListener('click', function(){
+      resultsEl.hidden = true; manualEl.hidden = false;
+      loadHint.textContent = "Run pearl_clip_risk.py, then drop its clip_risk.json here to see the scored card.";
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.getElementById('resultFile').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try { renderResults(JSON.parse(reader.result), file.name); }
+      catch(err){ loadHint.textContent = "Couldn't parse that JSON — is it the pipeline output?"; }
+    };
+    reader.readAsText(file);
+    e.target.value = ''; // allow re-loading the same file after a re-run
+  });
+})();
+</script>
+</body>
+</html>

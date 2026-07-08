@@ -34,6 +34,10 @@ Hold a Ghost migration and any new community product in reserve; don't build a c
 
 A working build of the website Pearl described lives in [site/](site/) — static Astro site with the mission-video hero, donate page with transparency section, events, blog, resources for fathers, statistics-with-sources framework, watch page, link-in-bio page, and email capture. See [site/README.md](site/README.md) for the deploy steps (Cloudflare Pages) and the pre-launch checklist.
 
+## The tools
+
+Two standalone browser tools for the team live in [tools/](tools/): an **Audience Retention Assessment** (score videos/clips from Studio metrics or public proxy data, with PPPS structure scoring and CSV import/export) and a **Clip & Statement Risk Assessor** (pre-publish legal/reputational triage with severity tiers). Both are self-contained static HTML — no build step, data stays in the browser. See [tools/README.md](tools/README.md).
+
 ## Next step
 
 Work through Phase 0 of [docs/05-roadmap.md](docs/05-roadmap.md) with Pearl (domain and account access, seven open questions), then start building the hub site — which is designed to live in this repo.
