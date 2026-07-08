@@ -10,9 +10,10 @@ Quick, zero-risk wins first (they build trust and fix live revenue leaks); anyth
 
 Deliverable: a filled-in access checklist.
 
-- [ ] Confirm ownership/registrar of `justpearlythings.com`; register it if free (it currently serves nothing).
+- [x] `justpearlythings.com`: checked July 2026 — **taken by a third party** (registered but serving nothing). Nice-to-have follow-up: WHOIS the owner for a purchase inquiry and/or place a backorder in case it lapses. Not a blocker.
+- [x] **Hub domain decision: the hub site launches on `hannahpearldavis.com`** — registered July 2026 (Namecheap, Megan's account). Follow-ups: enable auto-renew + domain privacy, redirect it to `theaudacitynetwork.com` until the hub launches, and plan transfer to Pearl's LLC ownership. Site titles/content should still target "JustPearlyThings" as the search term.
 - [ ] Check availability of the dead `theaudacitynetwork.store` and `audacitymerch.com`; if available, re-register and 301-redirect to `justpearlymerch.com`.
-- [x] Secondary name domain: `hannahpearldavis.com` registered July 2026 (Namecheap). Follow-ups: enable auto-renew + domain privacy, redirect it to `theaudacitynetwork.com` until the hub launches, and plan transfer to Pearl's LLC ownership. `pearldavis.com` is squatter-held at $3,488 — probably not worth buying since the content brand is JustPearlyThings.
+- [ ] `pearldavis.com` is squatter-held at $3,488 — probably not worth buying since the content brand is JustPearlyThings.
 - [ ] DNS access (likely Cloudflare, given `theaudacitynetwork.com`'s setup).
 - [ ] Read/export access to: Uscreen admin, Stripe dashboard, the Google Form's response spreadsheet, Shopify (merch) admin.
 - [ ] Brand assets: logo files, colors, fonts, approved photos, preferred bio copy.
@@ -26,7 +27,7 @@ Deliverable: a filled-in access checklist.
 
 ## Phase 2 — Hub site (project 1)
 
-- Build the static hub at `justpearlythings.com` in this repo (Astro/Next.js static, Cloudflare Pages, daily scheduled rebuild pulling latest episodes from feeds).
+- Build the static hub at `hannahpearldavis.com` in this repo (Astro/Next.js static, Cloudflare Pages, daily scheduled rebuild pulling latest episodes from feeds).
 - Ship with email capture present but pointing at the ESP set up in phase 3 (or launch both together).
 - Once live: update link-in-bio on every social profile and the description template for new videos to point at the hub.
 
@@ -65,7 +66,7 @@ No action. Criteria to reopen: Uscreen termination or major policy/pricing chang
 
 ## Open questions for Pearl
 
-1. Does she (or the LLC) own `justpearlythings.com`? If not, approve ~$15/yr to register it?
+1. ~~Does she (or the LLC) own `justpearlythings.com`?~~ Resolved July 2026: taken by a third party; hub launches on `hannahpearldavis.com`. Remaining sub-question for Pearl: any interest in pursuing the current owner or a backorder?
 2. What does `theaudacitynetwork.com/email` do today — is there a working signup form and where do those emails go?
 3. Which Uscreen plan is the account on (determines API access for automated exports)?
 4. Where are the master video files today — only in Uscreen/YouTube, or does a local/cloud archive exist?

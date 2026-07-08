@@ -2,7 +2,7 @@
 
 The direct answer to "what can I build for Pearl?" Five projects, ranked by value-to-effort, each concrete enough to start in this repo. Projects 1–4 all work *around* the existing Audacity Network without touching it, so nothing here risks the current business.
 
-## 1. The hub site at `justpearlythings.com` (start here)
+## 1. The hub site at `hannahpearldavis.com` (start here)
 
 **What:** a fast static site on the brand domain that becomes the single canonical link for everything.
 
@@ -14,7 +14,7 @@ The direct answer to "what can I build for Pearl?" Five projects, ranked by valu
 
 **Build:** Astro or Next.js (static export), Tailwind, deployed on Cloudflare Pages. A scheduled rebuild (daily cron) keeps the "Latest" feed fresh with zero backend. This entire project fits in this repo.
 
-**Prerequisite:** confirm `justpearlythings.com` is registered/registrable (it currently serves no DNS records — see [01-current-footprint.md](01-current-footprint.md)). If Pearl doesn't own it, registering it is the first dollar spent on this whole effort. Also worth grabbing while at it: re-register the dead `theaudacitynetwork.store` and `audacitymerch.com` if available, and redirect them to the live merch store, since hundreds of old episode descriptions still link to them.
+**Domain (resolved July 2026):** `justpearlythings.com` is taken by a third party (unused), so the hub launches on **`hannahpearldavis.com`**, registered July 2026 on Namecheap. Page titles and content should still target "JustPearlyThings" as the search term. Still worth doing: re-register the dead `theaudacitynetwork.store` and `audacitymerch.com` if available and redirect them to the live merch store, since hundreds of old episode descriptions still link to them; optionally WHOIS/backorder `justpearlythings.com` for the future.
 
 **Why first:** cheap, zero risk to existing revenue, fixes the funnel decay immediately, and is the surface every other project (email capture, episode archive) plugs into.
 
