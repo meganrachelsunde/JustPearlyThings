@@ -1,0 +1,116 @@
+---
+import Base from "../layouts/Base.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import { SITE, CTA } from "../config";
+import { getLatestEpisodes } from "../lib/episodes";
+
+const { episodes, live } = await getLatestEpisodes(6);
+const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
+---
+
+<Base title="Home" description={SITE.tagline}>
+  <section class="hero">
+    <span class="pill">Independent media</span>
+    <h1>The show they couldn't cancel.</h1>
+    <p class="lede">
+      Demonetized, banned, and blacklisted — still here. JustPearlyThings covers dating,
+      family, and the family court system with documentaries, daily shows, and real
+      conversations no network would touch.
+    </p>
+
+    <div class="video-frame">
+      {hasVideo ? (
+        <iframe
+          src={SITE.missionVideoEmbedUrl}
+          title="Our mission"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      ) : (
+        <div class="video-placeholder">
+          <p>
+            <strong>Mission video goes here.</strong><br />
+            Add the embed URL in <code>src/config.ts</code> once Pearl records it.
+          </p>
+        </div>
+      )}
+    </div>
+
+    <div class="btn-row">
+      <a class="btn primary" href={CTA.donate.url}>{CTA.donate.label}</a>
+      <a class="btn" href={CTA.membership.url} rel="noopener">{CTA.membership.label}</a>
+      <a class="btn" href="#email">Get updates</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where the money goes</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Making the content</h3>
+        <p class="muted">
+          Documentaries, the daily show, editors, and production — for Pearl and every
+          creator who joins the network.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Legal defense</h3>
+        <p class="muted">
+          Covering men's issues means lawsuits, demonetization, and blacklisting. Donations
+          keep the show on the air through all of it.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Fighting family court corruption</h3>
+        <p class="muted">
+          Supporting the work of advocates like Terrence Moore to expose administrative
+          violence and help fathers get a fair hearing.
+        </p>
+      </div>
+    </div>
+    <p><a href="/donate">See the full breakdown and ways to give →</a></p>
+  </section>
+
+  <section>
+    <h2>Latest episodes</h2>
+    {!live && (
+      <p class="notice">
+        Live feed unavailable at build time — showing the main channels instead.
+      </p>
+    )}
+    <div class="grid cols-2">
+      {episodes.map((ep) => (
+        <a class="card episode" href={ep.url} rel="noopener">
+          {ep.thumbnail && <img src={ep.thumbnail} alt="" loading="lazy" />}
+          <div>
+            <strong>{ep.title}</strong>
+            {ep.published && (
+              <p class="muted small">
+                {new Date(ep.published).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+              </p>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+    <p><a href="/watch">All the places to watch →</a></p>
+  </section>
+
+  <EmailSignup />
+</Base>
+
+<style>
+  .hero { margin-bottom: 3rem; }
+  .episode {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    color: var(--text);
+  }
+  .episode:hover { text-decoration: none; border-color: var(--accent); }
+  .episode img {
+    width: 128px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+</style>

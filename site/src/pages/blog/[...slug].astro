@@ -1,0 +1,34 @@
+---
+import Base from "../../layouts/Base.astro";
+import EmailSignup from "../../components/EmailSignup.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article class="post-article">
+    <p class="muted small">
+      {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+    </p>
+    <h1>{post.data.title}</h1>
+    <Content />
+  </article>
+  <p><a href="/blog">← All posts</a></p>
+  <EmailSignup compact />
+</Base>
+
+<style>
+  .post-article {
+    max-width: 46rem;
+  }
+</style>

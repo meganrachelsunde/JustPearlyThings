@@ -1,0 +1,32 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base title="Blog" description="Posts from Pearl: announcements, fundraisers, and the stories behind the show.">
+  <span class="pill">From Pearl</span>
+  <h1>Blog</h1>
+  <p class="lede">Announcements, fundraiser updates, and the stories behind the show.</p>
+
+  <div class="grid">
+    {posts.map((post) => (
+      <a class="card post" href={`/blog/${post.id}/`}>
+        <h3>{post.data.title}</h3>
+        <p class="muted small">
+          {post.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+        </p>
+        <p class="muted">{post.data.description}</p>
+      </a>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .post { color: var(--text); display: block; }
+  .post:hover { text-decoration: none; border-color: var(--accent); }
+  .post h3 { margin-top: 0; }
+</style>

@@ -1,0 +1,59 @@
+---
+import { EMAIL } from "../config";
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const live = EMAIL.formAction.length > 0;
+---
+
+<section class:list={["signup", { compact }]} id="email">
+  <h2>{EMAIL.heading}</h2>
+  <p class="muted">{EMAIL.blurb}</p>
+  {live ? (
+    <form action={EMAIL.formAction} method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+      <button type="submit" class="btn primary">Join the list</button>
+    </form>
+  ) : (
+    <form onsubmit="return false;" aria-disabled="true">
+      <input type="email" placeholder="you@example.com" disabled />
+      <button type="submit" class="btn" disabled>Coming soon</button>
+    </form>
+  )}
+</section>
+
+<style>
+  .signup {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin: 3rem 0 0;
+  }
+  .signup.compact { margin-top: 1.5rem; }
+  .signup h2 { margin-top: 0; }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+  }
+
+  input[type="email"] {
+    flex: 1 1 240px;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+  }
+  input[type="email"]:focus {
+    outline: 2px solid var(--accent);
+    border-color: transparent;
+  }
+  button[disabled] { opacity: 0.55; cursor: not-allowed; }
+</style>

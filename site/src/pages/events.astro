@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+
+/**
+ * Update this list as events are scheduled. Keep past events below —
+ * a visible track record builds trust for the fundraisers.
+ */
+const upcoming: { title: string; date: string; description: string; link?: string }[] = [];
+const past: { title: string; date: string; description: string }[] = [];
+---
+
+<Base title="Events" description="Monthly fundraisers and live events from JustPearlyThings and The Audacity Network.">
+  <span class="pill">Once a month</span>
+  <h1>Events</h1>
+  <p class="lede">
+    Every month we run a fundraiser event — live shows, call-ins, and specials — to fund the
+    documentaries, the legal defense, and the fight for family court reform.
+  </p>
+
+  <h2>Upcoming</h2>
+  {upcoming.length > 0 ? (
+    <div class="grid cols-2">
+      {upcoming.map((ev) => (
+        <div class="card">
+          <h3>{ev.title}</h3>
+          <p class="muted">{ev.date}</p>
+          <p>{ev.description}</p>
+          {ev.link && <a class="btn primary" href={ev.link} rel="noopener">Join</a>}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="card">
+      <h3>Next event coming soon</h3>
+      <p class="muted">
+        The next monthly fundraiser hasn't been announced yet. Join the email list below and
+        you'll be the first to know — or follow the live streams on
+        <a href="https://theaudacitynetwork.com" rel="noopener">The Audacity Network</a>.
+      </p>
+    </div>
+  )}
+
+  {past.length > 0 && (
+    <>
+      <h2>Past events</h2>
+      <div class="grid cols-2">
+        {past.map((ev) => (
+          <div class="card">
+            <h3>{ev.title}</h3>
+            <p class="muted">{ev.date}</p>
+            <p>{ev.description}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+  <EmailSignup />
+</Base>

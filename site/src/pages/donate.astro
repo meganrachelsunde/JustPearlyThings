@@ -1,0 +1,116 @@
+---
+import Base from "../layouts/Base.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import { DONATION_RAILS, CTA } from "../config";
+
+const showCrypto = DONATION_RAILS.crypto.verified;
+---
+
+<Base title="Donate" description="Support independent media: content production, legal defense, and the fight against family court corruption.">
+  <span class="pill">Support the network</span>
+  <h1>Donate</h1>
+  <p class="lede">
+    Your contribution keeps honest, unfiltered content on the air. Here's exactly what it
+    funds — and every way to give.
+  </p>
+
+  <h2>What we do with the money</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <h3>1. Content first</h3>
+      <p class="muted">
+        The number one priority: making the content. Documentaries, the daily show, paying
+        editors and production — for Pearl and anyone else who joins the network.
+      </p>
+    </div>
+    <div class="card">
+      <h3>2. Legal defense</h3>
+      <p class="muted">
+        Talking about men's issues means getting dragged to court, demonetized, and
+        blacklisted. Part of every donation goes to keeping the show alive through it.
+      </p>
+    </div>
+    <div class="card">
+      <h3>3. Travel and filming</h3>
+      <p class="muted">
+        Getting the stories out — travel, filming, and interviews with the people the
+        mainstream won't cover.
+      </p>
+    </div>
+    <div class="card">
+      <h3>4. Family court reform</h3>
+      <p class="muted">
+        Supporting the work of advocates like Terrence Moore on administrative violence and
+        family court corruption, once the content engine is funded.
+      </p>
+    </div>
+  </div>
+
+  <p class="notice" style="margin-top: 1.5rem;">
+    Donations support JustPearlyThings, LLC and are not tax-deductible. We keep this page
+    honest — when the nonprofit structure is finalized, tax-deductible giving will be
+    clearly marked here.
+  </p>
+
+  <h2>Ways to give</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <h3>Card</h3>
+      <p class="muted">One-time or recurring, through The Audacity Network.</p>
+      <a class="btn primary" href={DONATION_RAILS.card} rel="noopener">Donate by card</a>
+    </div>
+    <div class="card">
+      <h3>Cash App</h3>
+      <p><code>{DONATION_RAILS.cashApp}</code></p>
+    </div>
+    <div class="card">
+      <h3>Venmo</h3>
+      <p><code>{DONATION_RAILS.venmo}</code></p>
+    </div>
+    <div class="card">
+      <h3>Crypto</h3>
+      {showCrypto ? (
+        <ul class="crypto-list">
+          {DONATION_RAILS.crypto.addresses.map((c) => (
+            <li>
+              <strong>{c.coin}</strong>
+              <code>{c.address}</code>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="muted">
+          Crypto addresses are being re-verified and will appear here shortly. In the
+          meantime, use the address in the description of any recent episode.
+        </p>
+      )}
+    </div>
+  </div>
+
+  <h2>Other ways to support</h2>
+  <div class="btn-row">
+    <a class="btn" href={CTA.membership.url} rel="noopener">{CTA.membership.label}</a>
+    <a class="btn" href={CTA.merch.url} rel="noopener">{CTA.merch.label}</a>
+    <a class="btn" href={CTA.gofundme.url} rel="noopener">{CTA.gofundme.label}</a>
+  </div>
+  <p class="muted">
+    Membership is the steadiest support — it's what pays the bills every month. Annual
+    plans help the most.
+  </p>
+
+  <EmailSignup compact />
+</Base>
+
+<style>
+  .crypto-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .crypto-list li {
+    display: grid;
+    gap: 0.25rem;
+  }
+</style>
