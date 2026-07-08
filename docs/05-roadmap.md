@@ -12,7 +12,7 @@ Deliverable: a filled-in access checklist.
 
 - [ ] Confirm ownership/registrar of `justpearlythings.com`; register it if free (it currently serves nothing).
 - [ ] Check availability of the dead `theaudacitynetwork.store` and `audacitymerch.com`; if available, re-register and 301-redirect to `justpearlymerch.com`.
-- [ ] Decide on secondary name domains: `hannahpearldavis.com` appears unregistered (cheap defensive registration); `pearldavis.com` is squatter-held at $3,488 — probably not worth buying since the content brand is JustPearlyThings.
+- [x] Secondary name domain: `hannahpearldavis.com` registered July 2026 (Namecheap). Follow-ups: enable auto-renew + domain privacy, redirect it to `theaudacitynetwork.com` until the hub launches, and plan transfer to Pearl's LLC ownership. `pearldavis.com` is squatter-held at $3,488 — probably not worth buying since the content brand is JustPearlyThings.
 - [ ] DNS access (likely Cloudflare, given `theaudacitynetwork.com`'s setup).
 - [ ] Read/export access to: Uscreen admin, Stripe dashboard, the Google Form's response spreadsheet, Shopify (merch) admin.
 - [ ] Brand assets: logo files, colors, fonts, approved photos, preferred bio copy.

@@ -32,7 +32,7 @@ There is no website under her own name or the JustPearlyThings brand:
 | `justpearlythings.com` | No DNS records — unregistered or registered-but-unused |
 | `justpearlythings.net` / `.org` | Resolve to domain-parking infrastructure, no real site |
 | `pearldavis.com` | Parked and listed for sale at $3,488 (Spaceship) — held by a reseller |
-| `hannahpearldavis.com` | No DNS records — likely unregistered |
+| `hannahpearldavis.com` | **Registered July 2026 (Namecheap)** as a defensive registration; currently on default parking records |
 
 Searches for "JustPearlyThings" or "Pearl Davis" therefore land exclusively on third-party properties (YouTube, Wikipedia, critics).
 
