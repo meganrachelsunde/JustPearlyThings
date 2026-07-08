@@ -6,7 +6,7 @@
 export const SITE = {
   name: "JustPearlyThings",
   tagline: "Independent media on dating, family, and the family court system.",
-  domain: "justpearlythings.com",
+  domain: "hannahpearldavis.com",
   // TODO before launch: replace with the real mission video (YouTube/Rumble embed URL).
   missionVideoEmbedUrl: "",
 };

@@ -10,8 +10,8 @@ Quick, zero-risk wins first (they build trust and fix live revenue leaks); anyth
 
 Deliverable: a filled-in access checklist.
 
-- [x] **Hub domain decision: the hub site launches on `justpearlythings.com`** — purchased July 2026 (Megan's account; it had been registered-but-unused by a third party). Follow-ups: enable auto-renew + domain privacy, and plan transfer to Pearl's LLC ownership.
-- [x] `hannahpearldavis.com` — registered July 2026 (Namecheap, Megan's account) as a defensive domain. Set it to 301-redirect to `justpearlythings.com` once the hub is live (interim: redirect to `theaudacitynetwork.com`). Same follow-ups: auto-renew, privacy, LLC transfer.
+- [x] **Hub domain decision: the hub site launches on `hannahpearldavis.com`** — registered July 2026 (Namecheap, Megan's account). Follow-ups: enable auto-renew + domain privacy, and plan transfer to Pearl's LLC ownership.
+- [x] `justpearlythings.com` — checked July 2026: held by a third party (registered but serving nothing). Optional follow-up: WHOIS the owner for a purchase inquiry and/or place a backorder in case it lapses. Not a blocker; site titles/content target "JustPearlyThings" as the search term regardless.
 - [ ] Check availability of the dead `theaudacitynetwork.store` and `audacitymerch.com`; if available, re-register and 301-redirect to `justpearlymerch.com`.
 - [ ] `pearldavis.com` is squatter-held at $3,488 — probably not worth buying since the content brand is JustPearlyThings.
 - [ ] DNS access (likely Cloudflare, given `theaudacitynetwork.com`'s setup).
@@ -27,7 +27,7 @@ Deliverable: a filled-in access checklist.
 
 ## Phase 2 — Hub site (project 1)
 
-- Build the static hub at `justpearlythings.com` in this repo (Astro/Next.js static, Cloudflare Pages, daily scheduled rebuild pulling latest episodes from feeds), with `hannahpearldavis.com` redirecting to it.
+- Build the static hub at `hannahpearldavis.com` in this repo (Astro/Next.js static, Cloudflare Pages, daily scheduled rebuild pulling latest episodes from feeds).
 - Ship with email capture present but pointing at the ESP set up in phase 3 (or launch both together).
 - Once live: update link-in-bio on every social profile and the description template for new videos to point at the hub.
 
@@ -66,7 +66,7 @@ No action. Criteria to reopen: Uscreen termination or major policy/pricing chang
 
 ## Open questions for Pearl
 
-1. ~~Does she (or the LLC) own `justpearlythings.com`?~~ Resolved July 2026: Megan purchased it; hub launches there, with `hannahpearldavis.com` as a redirect. Remaining sub-question: timeline for transferring both domains to Pearl's LLC.
+1. ~~Does she (or the LLC) own `justpearlythings.com`?~~ Resolved July 2026: it's third-party-held; the hub launches on `hannahpearldavis.com` (Megan's Namecheap account). Remaining sub-questions: timeline for transferring the domain to Pearl's LLC, and any interest in pursuing the `justpearlythings.com` owner or a backorder.
 2. What does `theaudacitynetwork.com/email` do today — is there a working signup form and where do those emails go?
 3. Which Uscreen plan is the account on (determines API access for automated exports)?
 4. Where are the master video files today — only in Uscreen/YouTube, or does a local/cloud archive exist?

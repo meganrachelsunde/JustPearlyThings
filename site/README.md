@@ -18,7 +18,7 @@ npm run build    # static output in dist/
 
 1. Cloudflare Pages → Create project → connect this GitHub repo.
 2. Build settings: root directory `site`, build command `npm run build`, output `dist`.
-3. Add the custom domain `justpearlythings.com` (and `www`).
+3. Add the custom domain `hannahpearldavis.com` (and `www`). If `justpearlythings.com` is ever acquired, add it here and make it the primary.
 4. Set up a daily scheduled deploy (Pages → Settings → Builds, or a cron-triggered GitHub
    Action calling the deploy hook) so the "Latest episodes" feed stays fresh.
 

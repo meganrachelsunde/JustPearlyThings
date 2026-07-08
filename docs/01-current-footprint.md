@@ -14,7 +14,7 @@ An inventory of every channel, property, and revenue stream in the JustPearlyThi
 | `justpearlymerch.com` | Live | **Shopify** (resolves to Shopify infrastructure) | Current official merch store |
 | `theaudacitynetwork.store` | **Dead — no DNS** | Was the previous merch store | Still linked in many older video/podcast descriptions; those links are broken |
 | `audacitymerch.com` | **Dead — no DNS** | Was an earlier merch link | Still linked in Spotify podcast descriptions; broken |
-| `justpearlythings.com` | **Purchased July 2026** (was third-party-held and unused) | No site yet | Designated home for the hub site (build project 1) |
+| `hannahpearldavis.com` | **Registered July 2026** (Namecheap) | No site yet | Designated home for the hub site (build project 1) |
 | iOS app "The Audacity Network" | Live | Uscreen white-label app (`tv.uscreen.theaudacitynetwork`), in-app subscriptions via Apple | Mobile access to the membership |
 | Android app | Live (updated Oct 2025) | Same Uscreen white-label app, Google Play billing | Mobile access to the membership |
 
@@ -29,10 +29,10 @@ There is no website under her own name or the JustPearlyThings brand:
 
 | Domain | Status |
 |---|---|
-| `justpearlythings.com` | **Purchased July 2026** (had been third-party-held and unused); designated hub site domain |
+| `justpearlythings.com` | Held by a third party, serving no DNS records — unused. Optional: purchase inquiry/backorder |
 | `justpearlythings.net` / `.org` | Resolve to domain-parking infrastructure, no real site |
 | `pearldavis.com` | Parked and listed for sale at $3,488 (Spaceship) — held by a reseller |
-| `hannahpearldavis.com` | **Registered July 2026 (Namecheap)** as a defensive registration; will redirect to the hub |
+| `hannahpearldavis.com` | **Registered July 2026 (Namecheap)** — the hub site's designated home |
 
 Searches for "JustPearlyThings" or "Pearl Davis" therefore land exclusively on third-party properties (YouTube, Wikipedia, critics).
 
@@ -85,7 +85,7 @@ Everything flows through description links. There is no single hub page, no conf
 ## Immediate observations
 
 - **The funnel leaks.** Two of the merch domains linked across hundreds of episode descriptions are dead. Anyone clicking those links buys nothing.
-- **The brand domain was vacant until now.** `justpearlythings.com` served nothing until it was purchased in July 2026 for this project — the brand name with ~2M subscribers' worth of recognition still has no home page until the hub site ships there.
+- **The brand domain is out of reach for now.** `justpearlythings.com` is held by a third party and serves nothing — the brand name with ~2M subscribers' worth of recognition has no home page. The owned hub launches on `hannahpearldavis.com` instead, with titles and content targeting the "JustPearlyThings" search term.
 - **Email capture is a Google Form (old descriptions) or a page with no visible form (new descriptions).** There is no evidence of a functioning owned email list, which is the single most portable audience asset a creator can have.
 - **The owned platform is rented.** The Audacity Network runs on Uscreen — a solid product, but a SaaS vendor that can terminate service, and the mobile apps depend on Apple/Google review. See [02-risks-and-gaps.md](02-risks-and-gaps.md).
 
