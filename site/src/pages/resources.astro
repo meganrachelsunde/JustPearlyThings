@@ -1,0 +1,97 @@
+---
+import Base from "../layouts/Base.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+
+/**
+ * Curated starting list — national, established organizations only.
+ * Pearl should review, reorder, and extend this with the groups she trusts.
+ */
+const categories = [
+  {
+    name: "Custody and family court",
+    items: [
+      {
+        title: "National Parents Organization",
+        url: "https://www.sharedparenting.org",
+        blurb: "Advocacy and state-by-state resources for shared parenting after divorce.",
+      },
+      {
+        title: "American Bar Association — Free Legal Help",
+        url: "https://www.americanbar.org/groups/legal_services/flh-home/",
+        blurb: "Directory of free and low-cost legal aid by state, including family law.",
+      },
+      {
+        title: "LawHelp.org",
+        url: "https://www.lawhelp.org",
+        blurb: "Find free legal aid programs in your state for custody and support cases.",
+      },
+    ],
+  },
+  {
+    name: "Fathers' support",
+    items: [
+      {
+        title: "National Fatherhood Initiative",
+        url: "https://www.fatherhood.org",
+        blurb: "Programs and research on father involvement.",
+      },
+      {
+        title: "National Responsible Fatherhood Clearinghouse",
+        url: "https://www.fatherhood.gov",
+        blurb: "Federal clearinghouse with a national call center for dads (1-877-4DAD411).",
+      },
+    ],
+  },
+  {
+    name: "Crisis support",
+    items: [
+      {
+        title: "988 Suicide & Crisis Lifeline",
+        url: "https://988lifeline.org",
+        blurb: "Call or text 988, any time. Divorce and custody fights are brutal — talk to someone.",
+      },
+      {
+        title: "SAMHSA National Helpline",
+        url: "https://www.samhsa.gov/find-help/national-helpline",
+        blurb: "1-800-662-4357 — free, confidential, 24/7 help for mental health and substance use.",
+      },
+    ],
+  },
+];
+---
+
+<Base title="Resources for Fathers" description="Organizations, legal aid, and support lines for fathers navigating custody and family court.">
+  <span class="pill">Get help</span>
+  <h1>Resources for fathers</h1>
+  <p class="lede">
+    If you're in the middle of a custody fight, a divorce, or just trying to stay in your
+    kids' lives — start here. These are established organizations that can actually help.
+  </p>
+
+  {categories.map((cat) => (
+    <section>
+      <h2>{cat.name}</h2>
+      <div class="grid cols-3">
+        {cat.items.map((item) => (
+          <a class="card resource" href={item.url} rel="noopener">
+            <h3>{item.title}</h3>
+            <p class="muted">{item.blurb}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <p class="notice" style="margin-top: 2rem;">
+    Nothing on this page is legal advice. For your specific case, talk to a licensed family
+    law attorney in your state — the legal aid directories above can help you find one.
+  </p>
+
+  <EmailSignup compact />
+</Base>
+
+<style>
+  .resource { color: var(--text); display: block; }
+  .resource:hover { text-decoration: none; border-color: var(--accent); }
+  .resource h3 { margin-top: 0; }
+</style>

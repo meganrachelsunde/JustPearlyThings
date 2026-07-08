@@ -28,6 +28,11 @@ Hold a Ghost migration and any new community product in reserve; don't build a c
 | [docs/04-what-to-build.md](docs/04-what-to-build.md) | The five ranked build projects with scope and dependencies |
 | [docs/05-roadmap.md](docs/05-roadmap.md) | Phased sequencing, what Pearl must provide, open questions for her |
 | [docs/06-pearls-stated-priorities.md](docs/06-pearls-stated-priorities.md) | Pearl's own requirements from her video: feature wishlist, nonprofit plans, legal exposure |
+| [docs/07-answers-to-pearls-video.md](docs/07-answers-to-pearls-video.md) | Direct answers to her asks: website structure, marketing tips, nonprofit guidance |
+
+## The site itself
+
+A working build of the website Pearl described lives in [site/](site/) — static Astro site with the mission-video hero, donate page with transparency section, events, blog, resources for fathers, statistics-with-sources framework, watch page, link-in-bio page, and email capture. See [site/README.md](site/README.md) for the deploy steps (Cloudflare Pages) and the pre-launch checklist.
 
 ## Next step
 

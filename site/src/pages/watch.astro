@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import { CTA, SOCIALS, APPS } from "../config";
+
+const videoPlatforms = SOCIALS.filter((s) =>
+  ["YouTube", "Rumble"].some((n) => s.name.startsWith(n))
+);
+const podcastPlatforms = SOCIALS.filter((s) =>
+  ["Spotify", "Apple"].some((n) => s.name.startsWith(n))
+);
+---
+
+<Base title="Watch" description="Every place to watch and listen: The Audacity Network, YouTube, Rumble, and the Pearl Daily podcast.">
+  <span class="pill">All the shows</span>
+  <h1>Watch &amp; listen</h1>
+  <p class="lede">
+    The full experience — every episode, live streams, and community — lives on The Audacity
+    Network. Everything else is the free tier.
+  </p>
+
+  <div class="card featured">
+    <h2 style="margin-top:0;">The Audacity Network</h2>
+    <p class="muted">{CTA.membership.blurb}</p>
+    <div class="btn-row" style="margin-bottom:0;">
+      <a class="btn primary" href={CTA.membership.url} rel="noopener">Join now</a>
+      {APPS.map((app) => (
+        <a class="btn" href={app.url} rel="noopener">{app.name.split(" — ")[0]} app</a>
+      ))}
+    </div>
+  </div>
+
+  <h2>Free episodes and clips</h2>
+  <div class="grid cols-2">
+    {videoPlatforms.map((p) => (
+      <a class="card platform" href={p.url} rel="noopener">
+        <h3>{p.name}</h3>
+        <p class="muted">Full episodes, reacts, and clips.</p>
+      </a>
+    ))}
+  </div>
+
+  <h2>Podcast — Pearl Daily</h2>
+  <div class="grid cols-2">
+    {podcastPlatforms.map((p) => (
+      <a class="card platform" href={p.url} rel="noopener">
+        <h3>{p.name}</h3>
+        <p class="muted">The show in audio, wherever you listen.</p>
+      </a>
+    ))}
+  </div>
+
+  <h2>Administrative violence — with Terrence Moore</h2>
+  <div class="card">
+    <p class="muted">
+      Terrence Moore's series on administrative violence and family court corruption — how
+      the system actually works against fathers, from someone who's been through it. Episodes
+      coming to this page; catch the conversations on
+      <a href="https://theaudacitynetwork.com" rel="noopener">The Audacity Network</a> now.
+    </p>
+  </div>
+
+  <EmailSignup compact />
+</Base>
+
+<style>
+  .featured { border-color: var(--accent); margin-bottom: 1rem; }
+  .platform { color: var(--text); display: block; }
+  .platform:hover { text-decoration: none; border-color: var(--accent); }
+  .platform h3 { margin-top: 0; }
+</style>

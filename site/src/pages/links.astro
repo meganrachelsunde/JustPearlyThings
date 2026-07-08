@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+import { CTA, SOCIALS, APPS } from "../config";
+
+const primary = [
+  { label: "Donate", url: "/donate" },
+  { label: CTA.membership.label, url: CTA.membership.url },
+  { label: CTA.merch.label, url: CTA.merch.url },
+  { label: "Join the email list", url: "/#email" },
+  { label: CTA.gofundme.label, url: CTA.gofundme.url },
+];
+---
+
+<Base title="Links" description="Every official JustPearlyThings link in one place.">
+  <div class="links-wrap">
+    <span class="pill">Official links</span>
+    <h1>JustPearlyThings</h1>
+    <p class="muted">Every official link, one page. If it's not here, it's not us.</p>
+
+    <div class="link-stack">
+      {primary.map((l) => (
+        <a class="btn primary wide" href={l.url} rel="noopener">{l.label}</a>
+      ))}
+      {SOCIALS.map((s) => (
+        <a class="btn wide" href={s.url} rel="noopener">{s.name}</a>
+      ))}
+      {APPS.map((a) => (
+        <a class="btn wide" href={a.url} rel="noopener">{a.name}</a>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .links-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .link-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+  }
+  .wide { width: 100%; }
+</style>

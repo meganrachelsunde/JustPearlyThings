@@ -1,0 +1,77 @@
+---
+import Base from "../layouts/Base.astro";
+
+/**
+ * HOUSE RULE for this page: no claim goes live without a primary-source link.
+ * This page will be the most scrutinized on the site — every entry needs
+ * `source` and `sourceUrl` filled in and checked against the original document
+ * (not a screenshot, not a secondary article). Entries without a verified
+ * source stay in DRAFTS and never render.
+ */
+interface Stat {
+  claim: string;
+  source: string;
+  sourceUrl: string;
+  note?: string;
+}
+
+const published: Stat[] = [];
+
+// Move entries up to `published` only after the source has been verified.
+const drafts: Stat[] = [
+  {
+    claim: "Add Pearl's statistics here — one claim per entry.",
+    source: "Primary source name (e.g., U.S. Census Bureau, CDC, court records)",
+    sourceUrl: "",
+    note: "Each entry needs a working link to the original document before it renders.",
+  },
+];
+---
+
+<Base title="Statistics & Sources" description="The numbers behind the show — every claim with a link to its primary source.">
+  <span class="pill">Receipts included</span>
+  <h1>Statistics &amp; sources</h1>
+  <p class="lede">
+    The numbers we cite on the show, each with a link to the primary source so you can check
+    it yourself. If a claim isn't sourced, it doesn't go on this page.
+  </p>
+
+  {published.length > 0 ? (
+    <table>
+      <thead>
+        <tr>
+          <th>Claim</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        {published.map((s) => (
+          <tr>
+            <td>
+              {s.claim}
+              {s.note && <p class="muted small">{s.note}</p>}
+            </td>
+            <td>
+              <a href={s.sourceUrl} rel="noopener">{s.source}</a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  ) : (
+    <div class="card">
+      <h3>Being compiled now</h3>
+      <p class="muted">
+        Pearl is assembling the statistics from the show with their original sources —
+        family court outcomes, custody data, divorce statistics, and more. Every entry will
+        link to the primary document, not a screenshot. Check back soon.
+      </p>
+    </div>
+  )}
+
+  <p class="notice" style="margin-top: 2rem;">
+    Standard for this page: primary sources only (government data, court records,
+    peer-reviewed research), linked directly. Corrections welcome — if we got a number
+    wrong, tell us and we'll fix it publicly.
+  </p>
+</Base>
