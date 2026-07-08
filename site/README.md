@@ -38,8 +38,10 @@ All editable content lives in [`src/config.ts`](src/config.ts) unless noted.
 - [ ] Review donation wording on `/donate` with the nonprofit question resolved
       (see `docs/07-answers-to-pearls-video.md` §3).
 - [ ] Resources page (`src/pages/resources.astro`) — Pearl reviews/extends the list.
-- [ ] Statistics page (`src/pages/statistics.astro`) — add entries with verified primary
-      sources; nothing renders until moved to `published`.
+- [ ] Statistics engine (`src/data/statistics.ts`) — add/update records. Use:
+      - `published` for externally-ready claims with solid sourcing
+      - `from_video` for transcript-derived claims needing verification
+      - `needs_source` for research prompts (including feminist-statistics queue)
 - [ ] Replace the starter blog post in `src/content/blog/`.
 - [ ] Brand pass: real logo/photos in place of the "P" monogram, colors if Pearl has a palette.
 
@@ -49,3 +51,5 @@ All editable content lives in [`src/config.ts`](src/config.ts) unless noted.
   `date` frontmatter. Commit = publish.
 - **Events:** edit the `upcoming`/`past` arrays at the top of `src/pages/events.astro`.
 - **Links/socials/CTAs:** `src/config.ts`.
+- **Statistics & sources engine:** edit `src/data/statistics.ts` records. The
+  `/statistics` page automatically supports search + filtering by category/status/lens.

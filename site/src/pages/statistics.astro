@@ -1,77 +1,243 @@
 ---
 import Base from "../layouts/Base.astro";
+import { sourceQualityLabels, statisticsRecords } from "../data/statistics";
 
-/**
- * HOUSE RULE for this page: no claim goes live without a primary-source link.
- * This page will be the most scrutinized on the site — every entry needs
- * `source` and `sourceUrl` filled in and checked against the original document
- * (not a screenshot, not a secondary article). Entries without a verified
- * source stay in DRAFTS and never render.
- */
-interface Stat {
-  claim: string;
-  source: string;
-  sourceUrl: string;
-  note?: string;
-}
-
-const published: Stat[] = [];
-
-// Move entries up to `published` only after the source has been verified.
-const drafts: Stat[] = [
-  {
-    claim: "Add Pearl's statistics here — one claim per entry.",
-    source: "Primary source name (e.g., U.S. Census Bureau, CDC, court records)",
-    sourceUrl: "",
-    note: "Each entry needs a working link to the original document before it renders.",
-  },
-];
+const categories = [...new Set(statisticsRecords.map((s) => s.category))].sort();
+const total = statisticsRecords.length;
+const publishedCount = statisticsRecords.filter((s) => s.status === "published").length;
+const videoCount = statisticsRecords.filter((s) => s.status === "from_video").length;
+const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_source").length;
 ---
 
 <Base title="Statistics & Sources" description="The numbers behind the show — every claim with a link to its primary source.">
   <span class="pill">Receipts included</span>
   <h1>Statistics &amp; sources</h1>
   <p class="lede">
-    The numbers we cite on the show, each with a link to the primary source so you can check
-    it yourself. If a claim isn't sourced, it doesn't go on this page.
+    This is now a real statistics engine: every claim is tracked with category, source
+    quality, and publication status. No unsupported claims get marked as published.
   </p>
 
-  {published.length > 0 ? (
-    <table>
-      <thead>
-        <tr>
-          <th>Claim</th>
-          <th>Source</th>
-        </tr>
-      </thead>
-      <tbody>
-        {published.map((s) => (
-          <tr>
-            <td>
-              {s.claim}
-              {s.note && <p class="muted small">{s.note}</p>}
-            </td>
-            <td>
-              <a href={s.sourceUrl} rel="noopener">{s.source}</a>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  ) : (
+  <div class="grid cols-3 stats-overview">
     <div class="card">
-      <h3>Being compiled now</h3>
-      <p class="muted">
-        Pearl is assembling the statistics from the show with their original sources —
-        family court outcomes, custody data, divorce statistics, and more. Every entry will
-        link to the primary document, not a screenshot. Check back soon.
-      </p>
+      <p class="muted small">Total records</p>
+      <h2 class="kpi">{total}</h2>
     </div>
-  )}
+    <div class="card">
+      <p class="muted small">Published claims</p>
+      <h2 class="kpi">{publishedCount}</h2>
+    </div>
+    <div class="card">
+      <p class="muted small">Research queue</p>
+      <h2 class="kpi">{videoCount + needsSourceCount}</h2>
+    </div>
+  </div>
+
+  <section class="card filters">
+    <h2 style="margin-top:0;">Filter the dataset</h2>
+    <div class="filter-grid">
+      <label>
+        Search
+        <input id="filter-search" type="search" placeholder="custody, labor, TikTok bans..." />
+      </label>
+      <label>
+        Category
+        <select id="filter-category">
+          <option value="">All categories</option>
+          {categories.map((cat) => <option value={cat}>{cat}</option>)}
+        </select>
+      </label>
+      <label>
+        Status
+        <select id="filter-status">
+          <option value="">All statuses</option>
+          <option value="published">Published</option>
+          <option value="from_video">From video transcript</option>
+          <option value="needs_source">Needs source</option>
+        </select>
+      </label>
+      <label>
+        Lens
+        <select id="filter-lens">
+          <option value="">All lenses</option>
+          <option value="feminist-statistics">Feminist statistics</option>
+          <option value="family-court">Family court</option>
+          <option value="deplatforming">Deplatforming</option>
+          <option value="labor">Labor/economy</option>
+          <option value="public-health">Public health</option>
+        </select>
+      </label>
+    </div>
+  </section>
+
+  <section>
+    <h2>Feminist statistics tracker</h2>
+    <p class="muted">
+      Requested in Pearl's video. These entries are queued and categorized now; add exact values
+      and year-specific citations to move each record from <code>needs_source</code> to
+      <code>published</code>.
+    </p>
+    <div class="grid cols-2">
+      {statisticsRecords
+        .filter((r) => r.lens.includes("feminist-statistics"))
+        .map((r) => (
+          <article class="card stat-card"
+            data-category={r.category}
+            data-status={r.status}
+            data-lens={r.lens.join(" ")}
+            data-search={`${r.title} ${r.claim} ${r.sourceTitle} ${r.notes ?? ""}`.toLowerCase()}>
+            <div class="row">
+              <h3>{r.title}</h3>
+              <span class:list={["status", r.status]}>
+                {r.status.replaceAll("_", " ")}
+              </span>
+            </div>
+            <p>{r.claim}</p>
+            <p class="muted small">Category: {r.category}</p>
+            <p class="muted small">Source quality: {sourceQualityLabels[r.sourceQuality]}</p>
+            <p class="muted small">
+              Source: <a href={r.sourceUrl} rel="noopener">{r.sourceTitle}</a>
+            </p>
+            {r.notes && <p class="muted small">{r.notes}</p>}
+          </article>
+        ))}
+    </div>
+  </section>
+
+  <section>
+    <h2>All records</h2>
+    <div id="stats-grid" class="grid cols-2">
+      {statisticsRecords.map((r) => (
+        <article class="card stat-card"
+          data-category={r.category}
+          data-status={r.status}
+          data-lens={r.lens.join(" ")}
+          data-search={`${r.title} ${r.claim} ${r.sourceTitle} ${r.notes ?? ""}`.toLowerCase()}>
+          <div class="row">
+            <h3>{r.title}</h3>
+            <span class:list={["status", r.status]}>
+              {r.status.replaceAll("_", " ")}
+            </span>
+          </div>
+          {r.valueText && <p class="value">{r.valueText}</p>}
+          <p>{r.claim}</p>
+          <p class="muted small">Category: {r.category}</p>
+          <p class="muted small">Lens: {r.lens.join(", ")}</p>
+          <p class="muted small">Source quality: {sourceQualityLabels[r.sourceQuality]}</p>
+          <p class="muted small">
+            Source: <a href={r.sourceUrl} rel="noopener">{r.sourceTitle}</a>
+          </p>
+          {r.notes && <p class="muted small">{r.notes}</p>}
+        </article>
+      ))}
+    </div>
+    <p id="no-results" class="notice hidden" style="margin-top: 1rem;">
+      No records matched those filters.
+    </p>
+  </section>
 
   <p class="notice" style="margin-top: 2rem;">
-    Standard for this page: primary sources only (government data, court records,
-    peer-reviewed research), linked directly. Corrections welcome — if we got a number
-    wrong, tell us and we'll fix it publicly.
+    Source policy: records marked <code>published</code> should cite primary datasets
+    (government tables, court administrative data, or peer-reviewed research). Records marked
+    <code>from_video</code> or <code>needs_source</code> are working drafts and should not be
+    presented as verified facts yet.
   </p>
 </Base>
+
+<script>
+  const searchInput = document.getElementById("filter-search");
+  const categorySelect = document.getElementById("filter-category");
+  const statusSelect = document.getElementById("filter-status");
+  const lensSelect = document.getElementById("filter-lens");
+  const cards = Array.from(document.querySelectorAll("#stats-grid .stat-card"));
+  const noResults = document.getElementById("no-results");
+
+  function applyFilters() {
+    const search = (searchInput?.value || "").trim().toLowerCase();
+    const category = categorySelect?.value || "";
+    const status = statusSelect?.value || "";
+    const lens = lensSelect?.value || "";
+
+    let visible = 0;
+    cards.forEach((card) => {
+      const text = card.getAttribute("data-search") || "";
+      const cardCategory = card.getAttribute("data-category") || "";
+      const cardStatus = card.getAttribute("data-status") || "";
+      const cardLens = card.getAttribute("data-lens") || "";
+      const matchesSearch = !search || text.includes(search);
+      const matchesCategory = !category || cardCategory === category;
+      const matchesStatus = !status || cardStatus === status;
+      const matchesLens = !lens || cardLens.includes(lens);
+      const show = matchesSearch && matchesCategory && matchesStatus && matchesLens;
+      card.classList.toggle("hidden", !show);
+      if (show) visible += 1;
+    });
+
+    noResults?.classList.toggle("hidden", visible > 0);
+  }
+
+  [searchInput, categorySelect, statusSelect, lensSelect].forEach((el) => {
+    el?.addEventListener("input", applyFilters);
+    el?.addEventListener("change", applyFilters);
+  });
+</script>
+
+<style>
+  .kpi { margin: 0; }
+  .stats-overview h2 { margin-top: 0.15rem; }
+  .filters { margin-top: 1rem; }
+  .filter-grid {
+    display: grid;
+    gap: 0.9rem;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+  label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: grid;
+    gap: 0.35rem;
+  }
+  input, select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 0.55rem 0.65rem;
+  }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+  .row h3 { margin-top: 0; }
+  .value {
+    margin: 0.2rem 0 0.6rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  .status {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .status.published {
+    color: #76d3a9;
+    background: rgba(118, 211, 169, 0.12);
+    border-color: rgba(118, 211, 169, 0.5);
+  }
+  .status.from_video {
+    color: #f5c978;
+    background: rgba(245, 201, 120, 0.12);
+    border-color: rgba(245, 201, 120, 0.5);
+  }
+  .status.needs_source {
+    color: #d4a7ff;
+    background: rgba(212, 167, 255, 0.12);
+    border-color: rgba(212, 167, 255, 0.5);
+  }
+  .hidden { display: none !important; }
+</style>

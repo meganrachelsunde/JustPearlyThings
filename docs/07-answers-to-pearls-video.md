@@ -44,3 +44,16 @@ This is the one area where the honest answer is: **get a nonprofit attorney/CPA 
 ## What we built already ("just in case")
 
 A complete working version of the site you described is in this repo under `site/` — mission-video hero, donate page with transparency section, events, blog, resources for fathers, statistics-with-sources framework, watch page with a Terrence section, links page, about page, and email capture throughout. It's a static site: fast, cheap (~$0/mo hosting), and portable between hosts in minutes, which is exactly the resilience you're after. The domain `hannahpearldavis.com` is registered and ready to point at it (`justpearlythings.com` is held by a third party — worth a purchase inquiry someday, but not needed to launch). What it needs from you before launch: the mission video link, brand assets/photos, your statistics and sources, and answers to the four questions at the end of [06-pearls-stated-priorities.md](06-pearls-stated-priorities.md).
+
+### Statistics-and-sources engine implementation note (July 2026)
+
+The `/statistics` page is now backed by a structured dataset in
+`site/src/data/statistics.ts` with:
+
+- record statuses (`published`, `from_video`, `needs_source`)
+- source-quality tags (`primary`, `secondary`, `video_transcript`)
+- filters/search by category, status, and lens
+- a dedicated **feminist-statistics queue** populated from Pearl's stated priorities
+
+This lets us ingest claims from YouTube/transcript first as `from_video` and only move them to
+`published` once year-specific primary-source citations are attached.
