@@ -24,6 +24,16 @@ npm run build    # static output in dist/
 
 Netlify/Vercel work identically (base `site`, build `npm run build`, publish `dist`).
 
+## Team tools at /tools/
+
+Two self-contained browser tools live in [`public/tools/`](public/tools/) and deploy with the site:
+the Audience Retention Assessment (`/tools/retention-assessment.html`) and the Clip & Statement
+Risk Assessor (`/tools/risk-assessor.html`), with a launcher at `/tools/`. They are static HTML
+with no build step, and all entered data stays in the visitor's browser (localStorage) unless
+exported as CSV. **The site intentionally does not link to them** — the risk assessor is an
+internal instrument — so share the `/tools/` path directly with the team. Background and the
+domain plan: [docs/08-tools-assessment-and-domain.md](../docs/08-tools-assessment-and-domain.md).
+
 ## Before launch — checklist
 
 All editable content lives in [`src/config.ts`](src/config.ts) unless noted.

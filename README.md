@@ -29,10 +29,15 @@ Hold a Ghost migration and any new community product in reserve; don't build a c
 | [docs/05-roadmap.md](docs/05-roadmap.md) | Phased sequencing, what Pearl must provide, open questions for her |
 | [docs/06-pearls-stated-priorities.md](docs/06-pearls-stated-priorities.md) | Pearl's own requirements from her video: feature wishlist, nonprofit plans, legal exposure |
 | [docs/07-answers-to-pearls-video.md](docs/07-answers-to-pearls-video.md) | Direct answers to her asks: website structure, marketing tips, nonprofit guidance |
+| [docs/08-tools-assessment-and-domain.md](docs/08-tools-assessment-and-domain.md) | The retention/risk tools: assessment, how to deploy for Pearl's review, domain-attach steps |
 
 ## The site itself
 
 A working build of the website Pearl described lives in [site/](site/) — static Astro site with the mission-video hero, donate page with transparency section, events, blog, resources for fathers, statistics-with-sources framework, watch page, link-in-bio page, and email capture. See [site/README.md](site/README.md) for the deploy steps (Cloudflare Pages) and the pre-launch checklist.
+
+## The tools
+
+Two browser tools for the team ship inside the hub site at [site/public/tools/](site/public/tools/) and deploy with it, served at `/tools/`: an **Audience Retention Assessment** (score videos/clips from Studio metrics or public proxy data, with PPPS structure scoring and CSV import/export) and a **Clip & Statement Risk Assessor** (pre-publish legal/reputational triage with severity tiers). Both are self-contained static HTML — no build step, data stays in the browser. The site deliberately does not link to them; share the `/tools/` path directly with the team. Assessment, deployment, and domain plan: [docs/08-tools-assessment-and-domain.md](docs/08-tools-assessment-and-domain.md).
 
 ## Next step
 
