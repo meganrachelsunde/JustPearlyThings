@@ -86,7 +86,7 @@ export const EMAIL = {
    * While empty, the signup form stores nothing and shows a "coming soon" note.
    */
   formAction: "",
-  heading: "Never lose touch",
+  heading: "Email is the only channel we own.",
   blurb:
-    "Platforms ban, demonetize, and delete. Email doesn't. Join the list and you'll always know where to find the show.",
+    "Platforms decide who sees what and can end distribution overnight. An email list has no algorithm and no intermediary between us and you.",
 };
