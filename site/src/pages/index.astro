@@ -11,23 +11,17 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
 <Base title="Home" description={SITE.tagline}>
   <section class="hero">
     <span class="pill">The show</span>
-    <h1>The conversations everyone has, and almost nobody hosts.</h1>
-    <ul class="topics" aria-label="What the show covers">
-      <li>Dating.</li>
-      <li>Marriage.</li>
-      <li>Family.</li>
-      <li>Masculinity.</li>
-      <li>Feminism.</li>
-      <li>Family court.</li>
-    </ul>
+    <h1>Come argue. Bring receipts.</h1>
     <p class="lede">
-      Thousands of hours across every side of the argument. No edits that decide
-      the winner before the discussion begins.
+      Feminists, fathers, lawyers, judges. Sources on screen. Follow-up questions
+      actually asked. Fights that run to the end of the argument — not to the
+      end of the segment — and don't always land where the guest thought they
+      would.
     </p>
 
     <div class="btn-row">
-      <a class="btn primary" href={CTA.membership.url} rel="noopener">Watch the show</a>
-      <a class="btn" href="#latest">Latest episode</a>
+      <a class="btn primary" href="#latest">See the latest</a>
+      <a class="btn" href={CTA.membership.url} rel="noopener">Full library on Audacity</a>
       <a class="btn" href={CTA.donate.url}>{CTA.donate.label}</a>
     </div>
   </section>
@@ -127,18 +121,13 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
 
 <style>
   .hero { margin-bottom: 3rem; }
-  .topics {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0 1.25rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
   }
-  .topics li { color: var(--text); }
+  .hero .lede { max-width: 40rem; }
   .join-strip {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -155,7 +144,6 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
   .join-strip .video-frame { margin: 0; }
   @media (max-width: 720px) {
     .join-strip { grid-template-columns: 1fr; padding: 1.5rem; }
-    .topics { font-size: 1.15rem; gap: 0.5rem 1.25rem; }
   }
   .episode {
     display: flex;
