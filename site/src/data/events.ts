@@ -37,6 +37,7 @@ export type PastEvent = {
   raised?: string;
   usedFor?: string;
   recordingUrl?: string;
+  sourceUrl?: string;
 };
 
 /** Pearl's current audience survey asks for city/state and event interests. */
@@ -44,4 +45,13 @@ export const AUDIENCE_SURVEY_URL = "https://forms.gle/8zdVoukc5Nb9i5nA8";
 
 export const upcoming: UpcomingEvent[] = [];
 
-export const past: PastEvent[] = [];
+export const past: PastEvent[] = [
+  {
+    title: "Terrence Popp documentary interview and meet-and-greet",
+    date: "April 30, 2026",
+    description:
+      "Pearl joined Army combat veteran Terrence Popp at American Legion Post 372 in Cherry Hill, New Jersey, for an in-person documentary interview and meet-and-greet.",
+    sourceUrl:
+      "https://alch372.com/2026/04/29/meet-greet-documentary-interview-army-veteran-terrance-popp-pearl-davis/",
+  },
+];
