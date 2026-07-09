@@ -1,42 +1,57 @@
 ---
 import Base from "../layouts/Base.astro";
 import EmailSignup from "../components/EmailSignup.astro";
-
-/**
- * Update this list as events are scheduled. Keep past events below —
- * a visible track record builds trust for the fundraisers.
- */
-const upcoming: { title: string; date: string; description: string; link?: string }[] = [];
-const past: { title: string; date: string; description: string }[] = [];
+import { upcoming, past, RSVP_FORM_URL } from "../data/events";
 ---
 
-<Base title="Events" description="Monthly fundraisers and live events from JustPearlyThings and The Audacity Network.">
+<Base title="Events" description="Monthly fundraisers and live shows — with a public record of what each one raised and where the money went.">
   <span class="pill">Once a month</span>
   <h1>Events</h1>
   <p class="lede">
-    Every month we run a fundraiser event — live shows, call-ins, and specials — to fund the
-    documentaries, the legal defense, and the fight for family court reform.
+    One live event per month. Each one asks the audience to fund the month of reporting
+    that follows, and each one publishes what came in and where it went.
   </p>
+
+  <div class="card rsvp">
+    <h3 style="margin-top:0;">RSVP for the next event</h3>
+    <p class="muted">
+      One form covers every upcoming event. You'll get an email when the next date and
+      time are set, and again when the stream link is ready.
+    </p>
+    <a class="btn primary" href={RSVP_FORM_URL} rel="noopener" target="_blank">RSVP</a>
+  </div>
 
   <h2>Upcoming</h2>
   {upcoming.length > 0 ? (
     <div class="grid cols-2">
       {upcoming.map((ev) => (
         <div class="card">
-          <h3>{ev.title}</h3>
-          <p class="muted">{ev.date}</p>
+          <div class="row">
+            <h3 style="margin:0;">{ev.title}</h3>
+            {ev.isExample && <span class="badge">Example</span>}
+          </div>
+          <p class="muted small">
+            <span class="format">{ev.format}</span> · {ev.date}
+            {ev.time && <> · {ev.time}</>}
+          </p>
           <p>{ev.description}</p>
-          {ev.link && <a class="btn primary" href={ev.link} rel="noopener">Join</a>}
+          <div class="btn-row" style="margin-bottom:0;">
+            {ev.rsvpUrl && (
+              <a class="btn" href={ev.rsvpUrl} rel="noopener" target="_blank">RSVP</a>
+            )}
+            {ev.streamUrl && (
+              <a class="btn primary" href={ev.streamUrl} rel="noopener">Watch live</a>
+            )}
+          </div>
         </div>
       ))}
     </div>
   ) : (
     <div class="card">
-      <h3>Next event coming soon</h3>
+      <h3 style="margin-top:0;">Next event coming soon</h3>
       <p class="muted">
-        The next monthly fundraiser hasn't been announced yet. Join the email list below and
-        you'll be the first to know — or follow the live streams on
-        <a href="https://theaudacitynetwork.com" rel="noopener">The Audacity Network</a>.
+        The next monthly event hasn't been announced yet. RSVP above to be first to
+        hear when it is.
       </p>
     </div>
   )}
@@ -44,12 +59,32 @@ const past: { title: string; date: string; description: string }[] = [];
   {past.length > 0 && (
     <>
       <h2>Past events</h2>
+      <p class="muted">
+        Every past event lists what came in and what the money paid for. This is the
+        record.
+      </p>
       <div class="grid cols-2">
         {past.map((ev) => (
           <div class="card">
-            <h3>{ev.title}</h3>
-            <p class="muted">{ev.date}</p>
+            <div class="row">
+              <h3 style="margin:0;">{ev.title}</h3>
+              {ev.isExample && <span class="badge">Example</span>}
+            </div>
+            <p class="muted small">{ev.date}</p>
             <p>{ev.description}</p>
+            {(ev.raised || ev.usedFor) && (
+              <div class="ledger">
+                {ev.raised && (
+                  <p class="ledger-line"><strong>Raised:</strong> {ev.raised}</p>
+                )}
+                {ev.usedFor && (
+                  <p class="ledger-line"><strong>Went to:</strong> {ev.usedFor}</p>
+                )}
+              </div>
+            )}
+            {ev.recordingUrl && (
+              <a class="btn" href={ev.recordingUrl} rel="noopener">Watch the recording</a>
+            )}
           </div>
         ))}
       </div>
@@ -58,3 +93,26 @@ const past: { title: string; date: string; description: string }[] = [];
 
   <EmailSignup />
 </Base>
+
+<style>
+  .rsvp { border-color: var(--accent); margin-bottom: 2rem; }
+  .row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .format { text-transform: capitalize; }
+  .small { font-size: 0.9rem; }
+  .ledger {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line, rgba(255,255,255,0.1));
+  }
+  .ledger-line { margin: 0.25rem 0; }
+</style>
