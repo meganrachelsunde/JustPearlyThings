@@ -10,74 +10,29 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
 
 <Base title="Home" description={SITE.tagline}>
   <section class="hero">
-    <span class="pill">Independent media</span>
-    <h1>Truth doesn't become false because it's unpopular.</h1>
-    <p class="lede">It becomes harder to find. That's why this network exists.</p>
-    <p class="muted">
-      Documentaries, a daily show, and reporting on dating, family, and the family
-      courts — funded by the people who want the work made, not by whoever gets to
-      decide what runs. The full library lives at
-      <a href={CTA.membership.url} rel="noopener">The Audacity Network</a>;
-      the sources, the mission, and the ways to support it live here.
+    <span class="pill">The show</span>
+    <h1>The conversations everyone has, and almost nobody hosts.</h1>
+    <ul class="topics" aria-label="What the show covers">
+      <li>Dating.</li>
+      <li>Marriage.</li>
+      <li>Family.</li>
+      <li>Masculinity.</li>
+      <li>Feminism.</li>
+      <li>Family court.</li>
+    </ul>
+    <p class="lede">
+      Thousands of hours across every side of the argument. No edits that decide
+      the winner before the discussion begins.
     </p>
 
-    <div class="video-frame">
-      {hasVideo ? (
-        <iframe
-          src={SITE.missionVideoEmbedUrl}
-          title="Our mission"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        />
-      ) : (
-        <div class="video-placeholder">
-          <p>
-            <strong>Mission video goes here.</strong><br />
-            Add the embed URL in <code>src/config.ts</code> once Pearl records it.
-          </p>
-        </div>
-      )}
-    </div>
-
     <div class="btn-row">
-      <a class="btn primary" href={CTA.donate.url}>{CTA.donate.label}</a>
-      <a class="btn" href={CTA.membership.url} rel="noopener">{CTA.membership.label}</a>
-      <a class="btn" href="#email">Get updates</a>
+      <a class="btn primary" href={CTA.membership.url} rel="noopener">Watch the show</a>
+      <a class="btn" href="#latest">Latest episode</a>
+      <a class="btn" href={CTA.donate.url}>{CTA.donate.label}</a>
     </div>
   </section>
 
-  <section>
-    <h2>Where the money goes</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Content</h3>
-        <p class="muted">
-          Reporting is labor. Editors, producers, and writers get paid whether or
-          not any single piece performs. Viewer funding is what lets a documentary
-          get made when it wouldn't earn back its cost on advertising.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Legal</h3>
-        <p class="muted">
-          Covering institutions critically invites lawsuits, meritorious or not.
-          Defending them costs money regardless. Budgeting for it up front keeps
-          reporting on the record instead of quietly retracted.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Fieldwork</h3>
-        <p class="muted">
-          The stories that matter rarely come to a studio. Interviews with parents
-          inside a family-court process, or communities inside a system that failed
-          them, take travel and time on the ground.
-        </p>
-      </div>
-    </div>
-    <p><a href="/donate">Full breakdown and ways to give →</a></p>
-  </section>
-
-  <section>
+  <section id="latest">
     <h2>Latest episodes</h2>
     {!live && (
       <p class="notice">
@@ -102,11 +57,106 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
     <p><a href="/watch">All the places to watch →</a></p>
   </section>
 
+  <section class="join-strip">
+    <div class="join-copy">
+      <span class="pill">The full library</span>
+      <h2>Join The Audacity Network.</h2>
+      <p>
+        Every episode, live streams, exclusive documentaries, and the community
+        around them. This site is the public front door; the show itself lives on
+        Audacity.
+      </p>
+      <div class="btn-row">
+        <a class="btn primary" href={CTA.membership.url} rel="noopener">{CTA.membership.label}</a>
+        <a class="btn" href="/about">What this network is</a>
+      </div>
+    </div>
+    <div class="video-frame">
+      {hasVideo ? (
+        <iframe
+          src={SITE.missionVideoEmbedUrl}
+          title="Why this network exists"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      ) : (
+        <div class="video-placeholder">
+          <p>
+            <strong>Mission video slot.</strong><br />
+            Add the YouTube embed URL in <code>src/config.ts</code> once Pearl records the
+            one-take on why this network exists.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section>
+    <h2>Where the money goes</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Content</h3>
+        <p class="muted">
+          Editors, producers, and writers get paid whether or not any single piece
+          performs. Viewer funding is what lets a documentary get made when it
+          wouldn't earn back its cost on ads alone.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Legal</h3>
+        <p class="muted">
+          Covering institutions honestly invites lawsuits — meritorious or not.
+          Budgeting for defense keeps the reporting on the record instead of
+          quietly retracted.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Fieldwork</h3>
+        <p class="muted">
+          Travel and time on the ground. Interviews with parents inside a
+          family-court process, or communities inside a system that failed them,
+          don't come to a studio.
+        </p>
+      </div>
+    </div>
+    <p><a href="/donate">Full breakdown and ways to give →</a> · <a href="/transparency">Transparency policy →</a></p>
+  </section>
+
   <EmailSignup />
 </Base>
 
 <style>
   .hero { margin-bottom: 3rem; }
+  .topics {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .topics li { color: var(--text); }
+  .join-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    background: var(--surface, rgba(255,255,255,0.02));
+    border: 1px solid var(--border, rgba(255,255,255,0.08));
+    border-radius: 12px;
+    margin: 3rem 0;
+  }
+  .join-copy .pill { margin-bottom: 0.75rem; }
+  .join-copy h2 { margin-top: 0.25rem; }
+  .join-strip .video-frame { margin: 0; }
+  @media (max-width: 720px) {
+    .join-strip { grid-template-columns: 1fr; padding: 1.5rem; }
+    .topics { font-size: 1.15rem; gap: 0.5rem 1.25rem; }
+  }
   .episode {
     display: flex;
     gap: 1rem;
