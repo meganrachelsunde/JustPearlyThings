@@ -13,8 +13,8 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
   <span class="pill">Receipts included</span>
   <h1>Statistics &amp; sources</h1>
   <p class="lede">
-    This is now a real statistics engine: every claim is tracked with category, source
-    quality, and publication status. No unsupported claims get marked as published.
+    Every claim published here has a link to its primary source. Every claim that
+    doesn't is flagged — you can read either, but you can't confuse them.
   </p>
 
   <div class="grid cols-3 stats-overview">
@@ -70,11 +70,14 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
   </section>
 
   <section>
-    <h2>Feminist statistics tracker</h2>
+    <h2>Feminist statistics</h2>
     <p class="muted">
-      Requested in Pearl's video. These entries are queued and categorized now; add exact values
-      and year-specific citations to move each record from <code>needs_source</code> to
-      <code>published</code>.
+      The specific claims cited most often in public feminist discourse — pay gap,
+      domestic violence, custody, mental health, participation and attainment. Each entry
+      here will link the actual primary source and the methodology the argument turns on,
+      so the claim can be evaluated on the data instead of on the slogan. Entries move
+      from <code>needs source</code> to <code>published</code> as the sourcing is
+      completed.
     </p>
     <div class="grid cols-2">
       {statisticsRecords
@@ -136,10 +139,12 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
   </section>
 
   <p class="notice" style="margin-top: 2rem;">
-    Source policy: records marked <code>published</code> should cite primary datasets
-    (government tables, court administrative data, or peer-reviewed research). Records marked
-    <code>from_video</code> or <code>needs_source</code> are working drafts and should not be
-    presented as verified facts yet.
+    <strong>Source policy.</strong> <code>Published</code> records cite a primary
+    dataset — government tables, court administrative data, or peer-reviewed research.
+    <code>From video</code> records are things Pearl has said on air that still need
+    independent sourcing before being treated as verified. <code>Needs source</code>
+    records are research prompts on the queue. This page is intended to be checkable line
+    by line.
   </p>
 </Base>
 
