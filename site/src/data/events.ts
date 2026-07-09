@@ -54,4 +54,12 @@ export const past: PastEvent[] = [
     sourceUrl:
       "https://alch372.com/2026/04/29/meet-greet-documentary-interview-army-veteran-terrance-popp-pearl-davis/",
   },
+  {
+    title: "Pearl Davis vs. Ana Kasparian — Word War Debate WW1",
+    date: "January 10, 2026",
+    description:
+      "Pearl debated Ana Kasparian live at the inaugural Word War Debate event in Atlantic City, New Jersey.",
+    sourceUrl:
+      "https://wordwardebate.com/ww1-debate-results#da0e05f3-ffe2-4300-82ba-b8af1e2e0405",
+  },
 ];
