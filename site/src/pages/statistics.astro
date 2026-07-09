@@ -1,34 +1,32 @@
 ---
 import Base from "../layouts/Base.astro";
-import { sourceQualityLabels, statisticsRecords } from "../data/statistics";
+import { publishedStatisticsRecords, sourceQualityLabels } from "../data/statistics";
 
-const categories = [...new Set(statisticsRecords.map((s) => s.category))].sort();
-const total = statisticsRecords.length;
-const publishedCount = statisticsRecords.filter((s) => s.status === "published").length;
-const videoCount = statisticsRecords.filter((s) => s.status === "from_video").length;
-const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_source").length;
+const categories = [...new Set(publishedStatisticsRecords.map((s) => s.category))].sort();
+const publishedCount = publishedStatisticsRecords.length;
+const sourceCount = new Set(publishedStatisticsRecords.map((s) => s.sourceUrl)).size;
 ---
 
 <Base title="Statistics & Sources" description="The numbers behind the show — every claim with a link to its primary source.">
   <span class="pill">Receipts included</span>
   <h1>Statistics &amp; sources</h1>
   <p class="lede">
-    Every claim published here has a link to its primary source. Every claim that
-    doesn't is flagged — you can read either, but you can't confuse them.
+    Every claim on this page links to a primary source and identifies the year,
+    table, population, and limitation. Unverified show claims stay off the public page.
   </p>
 
   <div class="grid cols-3 stats-overview">
-    <div class="card">
-      <p class="muted small">Total records</p>
-      <h2 class="kpi">{total}</h2>
-    </div>
     <div class="card">
       <p class="muted small">Published claims</p>
       <h2 class="kpi">{publishedCount}</h2>
     </div>
     <div class="card">
-      <p class="muted small">Research queue</p>
-      <h2 class="kpi">{videoCount + needsSourceCount}</h2>
+      <p class="muted small">Primary sources</p>
+      <h2 class="kpi">{sourceCount}</h2>
+    </div>
+    <div class="card">
+      <p class="muted small">Citation standard</p>
+      <h2 class="kpi words">Year · table · method</h2>
     </div>
   </div>
 
@@ -37,22 +35,13 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
     <div class="filter-grid">
       <label>
         Search
-        <input id="filter-search" type="search" placeholder="custody, labor, TikTok bans..." />
+        <input id="filter-search" type="search" placeholder="custody, earnings, suicide..." />
       </label>
       <label>
         Category
         <select id="filter-category">
           <option value="">All categories</option>
           {categories.map((cat) => <option value={cat}>{cat}</option>)}
-        </select>
-      </label>
-      <label>
-        Status
-        <select id="filter-status">
-          <option value="">All statuses</option>
-          <option value="published">Published</option>
-          <option value="from_video">From video transcript</option>
-          <option value="needs_source">Needs source</option>
         </select>
       </label>
       <label>
@@ -70,46 +59,13 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
   </section>
 
   <section>
-    <h2>Feminist statistics</h2>
+    <h2>Published evidence</h2>
     <p class="muted">
-      The specific claims cited most often in public feminist discourse — pay gap,
-      domestic violence, custody, mental health, participation and attainment. Each entry
-      here will link the actual primary source and the methodology the argument turns on,
-      so the claim can be evaluated on the data instead of on the slogan. Entries move
-      from <code>needs source</code> to <code>published</code> as the sourcing is
-      completed.
+      The cards distinguish what a dataset measures from what it cannot establish.
+      A descriptive difference is not automatically evidence of its cause.
     </p>
-    <div class="grid cols-2">
-      {statisticsRecords
-        .filter((r) => r.lens.includes("feminist-statistics"))
-        .map((r) => (
-          <article class="card stat-card"
-            data-category={r.category}
-            data-status={r.status}
-            data-lens={r.lens.join(" ")}
-            data-search={`${r.title} ${r.claim} ${r.sourceTitle} ${r.notes ?? ""}`.toLowerCase()}>
-            <div class="row">
-              <h3>{r.title}</h3>
-              <span class:list={["status", r.status]}>
-                {r.status.replaceAll("_", " ")}
-              </span>
-            </div>
-            <p>{r.claim}</p>
-            <p class="muted small">Category: {r.category}</p>
-            <p class="muted small">Source quality: {sourceQualityLabels[r.sourceQuality]}</p>
-            <p class="muted small">
-              Source: <a href={r.sourceUrl} rel="noopener">{r.sourceTitle}</a>
-            </p>
-            {r.notes && <p class="muted small">{r.notes}</p>}
-          </article>
-        ))}
-    </div>
-  </section>
-
-  <section>
-    <h2>All records</h2>
     <div id="stats-grid" class="grid cols-2">
-      {statisticsRecords.map((r) => (
+      {publishedStatisticsRecords.map((r) => (
         <article class="card stat-card"
           data-category={r.category}
           data-status={r.status}
@@ -129,7 +85,15 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
           <p class="muted small">
             Source: <a href={r.sourceUrl} rel="noopener">{r.sourceTitle}</a>
           </p>
-          {r.notes && <p class="muted small">{r.notes}</p>}
+          {r.tableReference && (
+            <p class="citation"><strong>Exact citation:</strong> {r.tableReference}</p>
+          )}
+          {r.methodology && (
+            <p class="method"><strong>What was measured:</strong> {r.methodology}</p>
+          )}
+          {r.notes && (
+            <p class="limitation"><strong>What this does not prove:</strong> {r.notes}</p>
+          )}
         </article>
       ))}
     </div>
@@ -139,19 +103,16 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
   </section>
 
   <p class="notice" style="margin-top: 2rem;">
-    <strong>Source policy.</strong> <code>Published</code> records cite a primary
-    dataset — government tables, court administrative data, or peer-reviewed research.
-    <code>From video</code> records are things Pearl has said on air that still need
-    independent sourcing before being treated as verified. <code>Needs source</code>
-    records are research prompts on the queue. This page is intended to be checkable line
-    by line.
+    <strong>Source policy.</strong> Public records must cite a primary government
+    dataset or peer-reviewed study, name the exact table or figure, define the measured
+    population, and state the material limitation. Transcript claims and research prompts
+    remain in the private editorial queue until they meet that standard.
   </p>
 </Base>
 
 <script>
   const searchInput = document.getElementById("filter-search");
   const categorySelect = document.getElementById("filter-category");
-  const statusSelect = document.getElementById("filter-status");
   const lensSelect = document.getElementById("filter-lens");
   const cards = Array.from(document.querySelectorAll("#stats-grid .stat-card"));
   const noResults = document.getElementById("no-results");
@@ -159,20 +120,17 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
   function applyFilters() {
     const search = (searchInput?.value || "").trim().toLowerCase();
     const category = categorySelect?.value || "";
-    const status = statusSelect?.value || "";
     const lens = lensSelect?.value || "";
 
     let visible = 0;
     cards.forEach((card) => {
       const text = card.getAttribute("data-search") || "";
       const cardCategory = card.getAttribute("data-category") || "";
-      const cardStatus = card.getAttribute("data-status") || "";
       const cardLens = card.getAttribute("data-lens") || "";
       const matchesSearch = !search || text.includes(search);
       const matchesCategory = !category || cardCategory === category;
-      const matchesStatus = !status || cardStatus === status;
       const matchesLens = !lens || cardLens.includes(lens);
-      const show = matchesSearch && matchesCategory && matchesStatus && matchesLens;
+      const show = matchesSearch && matchesCategory && matchesLens;
       card.classList.toggle("hidden", !show);
       if (show) visible += 1;
     });
@@ -180,7 +138,7 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
     noResults?.classList.toggle("hidden", visible > 0);
   }
 
-  [searchInput, categorySelect, statusSelect, lensSelect].forEach((el) => {
+  [searchInput, categorySelect, lensSelect].forEach((el) => {
     el?.addEventListener("input", applyFilters);
     el?.addEventListener("change", applyFilters);
   });
@@ -188,6 +146,7 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
 
 <style>
   .kpi { margin: 0; }
+  .kpi.words { font-size: 1.15rem; }
   .stats-overview h2 { margin-top: 0.15rem; }
   .filters { margin-top: 1rem; }
   .filter-grid {
@@ -219,6 +178,21 @@ const needsSourceCount = statisticsRecords.filter((s) => s.status === "needs_sou
     margin: 0.2rem 0 0.6rem;
     font-size: 1.2rem;
     font-weight: 700;
+  }
+  .citation, .method, .limitation {
+    margin: 0.75rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .citation { color: var(--text-muted); }
+  .method { color: var(--text); }
+  .limitation {
+    color: #f0cf8c;
+    background: rgba(232, 182, 76, 0.07);
+    border: 1px solid rgba(232, 182, 76, 0.22);
+    border-radius: 10px;
+    padding: 0.75rem;
   }
   .status {
     font-size: 0.72rem;
