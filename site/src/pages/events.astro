@@ -28,7 +28,6 @@ import { upcoming, past, AUDIENCE_SURVEY_URL } from "../data/events";
         <div class="card">
           <div class="row">
             <h3 style="margin:0;">{ev.title}</h3>
-            {ev.isExample && <span class="badge">Example</span>}
           </div>
           <p class="muted small">
             <span class="format">{ev.format}</span> · {ev.date}
@@ -68,7 +67,6 @@ import { upcoming, past, AUDIENCE_SURVEY_URL } from "../data/events";
           <div class="card">
             <div class="row">
               <h3 style="margin:0;">{ev.title}</h3>
-              {ev.isExample && <span class="badge">Example</span>}
             </div>
             <p class="muted small">{ev.date}</p>
             <p>{ev.description}</p>
@@ -97,16 +95,6 @@ import { upcoming, past, AUDIENCE_SURVEY_URL } from "../data/events";
 <style>
   .rsvp { border-color: var(--accent); margin-bottom: 2rem; }
   .row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-  .badge {
-    display: inline-block;
-    padding: 0.15rem 0.5rem;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    color: var(--accent);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
   .format { text-transform: capitalize; }
   .small { font-size: 0.9rem; }
   .ledger {

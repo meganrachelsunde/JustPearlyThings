@@ -28,7 +28,6 @@ export type UpcomingEvent = {
   description: string;
   rsvpUrl?: string;
   streamUrl?: string;
-  isExample?: boolean;
 };
 
 export type PastEvent = {
@@ -38,7 +37,6 @@ export type PastEvent = {
   raised?: string;
   usedFor?: string;
   recordingUrl?: string;
-  isExample?: boolean;
 };
 
 /** Pearl's current audience survey asks for city/state and event interests. */
