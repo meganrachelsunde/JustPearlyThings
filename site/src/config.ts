@@ -7,8 +7,9 @@ export const SITE = {
   name: "JustPearlyThings",
   tagline: "Independent media on dating, family, and the family court system.",
   domain: "hannahpearldavis.com",
-  // TODO before launch: replace with the real mission video (YouTube/Rumble embed URL).
-  missionVideoEmbedUrl: "",
+  // Pearl's June 2026 explanation of why she built the network and what it funds.
+  // Replace this when she records the shorter dedicated homepage version.
+  missionVideoEmbedUrl: "https://www.youtube.com/embed/5WNuQ2gWvwc",
 };
 
 export const CTA = {
@@ -33,7 +34,7 @@ export const CTA = {
 
 export const DONATION_RAILS = {
   // Card donations go through the existing Stripe flow on The Audacity Network.
-  card: "https://theaudacitynetwork.com",
+  card: "https://theaudacitynetwork.com/support-us",
   cashApp: "$pearlythings",
   venmo: "Just_pearlythings",
   /**
@@ -89,4 +90,5 @@ export const EMAIL = {
   heading: "Email is the only channel we own.",
   blurb:
     "Platforms decide who sees what and can end distribution overnight. An email list has no algorithm and no intermediary between us and you.",
+  fallbackSurveyUrl: "https://forms.gle/8zdVoukc5Nb9i5nA8",
 };

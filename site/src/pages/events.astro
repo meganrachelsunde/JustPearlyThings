@@ -1,24 +1,24 @@
 ---
 import Base from "../layouts/Base.astro";
 import EmailSignup from "../components/EmailSignup.astro";
-import { upcoming, past, RSVP_FORM_URL } from "../data/events";
+import { upcoming, past, AUDIENCE_SURVEY_URL } from "../data/events";
 ---
 
 <Base title="Events" description="Monthly fundraisers and live shows — with a public record of what each one raised and where the money went.">
-  <span class="pill">Once a month</span>
+  <span class="pill">Live and in person</span>
   <h1>Events</h1>
   <p class="lede">
-    One live event per month. Each one asks the audience to fund the month of reporting
-    that follows, and each one publishes what came in and where it went.
+    Pearl is planning recurring live events and fundraisers. Confirmed dates and stream
+    links will be posted here—not guessed in advance.
   </p>
 
   <div class="card rsvp">
-    <h3 style="margin-top:0;">RSVP for the next event</h3>
+    <h3 style="margin-top:0;">Help choose where Pearl goes next</h3>
     <p class="muted">
-      One form covers every upcoming event. You'll get an email when the next date and
-      time are set, and again when the stream link is ready.
+      Pearl's audience survey asks where you live and what you want to see. It is not an
+      event ticket or a confirmed RSVP.
     </p>
-    <a class="btn primary" href={RSVP_FORM_URL} rel="noopener" target="_blank">RSVP</a>
+    <a class="btn primary" href={AUDIENCE_SURVEY_URL} rel="noopener" target="_blank">Take the audience survey</a>
   </div>
 
   <h2>Upcoming</h2>
@@ -50,8 +50,8 @@ import { upcoming, past, RSVP_FORM_URL } from "../data/events";
     <div class="card">
       <h3 style="margin-top:0;">Next event coming soon</h3>
       <p class="muted">
-        The next monthly event hasn't been announced yet. RSVP above to be first to
-        hear when it is.
+        No date has been announced. When Pearl confirms the city, format, and time,
+        this page will carry the official RSVP or stream link.
       </p>
     </div>
   )}

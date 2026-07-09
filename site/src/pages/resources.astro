@@ -68,6 +68,33 @@ const categories = [
     kids' lives — start here. These are established organizations that can actually help.
   </p>
 
+  <section>
+    <h2>Administrative Violence — Terrence Popp</h2>
+    <div class="card featured">
+      <p>
+        Terrence Popp is a retired Army first sergeant and combat veteran whose work
+        covers divorce, custody, veteran suicide prevention, and the bureaucratic
+        pressure men encounter inside family court.
+      </p>
+      <p class="muted">
+        His <em>Administrative Violence: Divorce and Custody Edition</em> is a paid
+        Redonkulas training program, not free legal representation. Use it as education
+        alongside advice from a licensed attorney in your state.
+      </p>
+      <div class="btn-row">
+        <a class="btn primary" href="https://buy.stripe.com/7sI4gM8Mw57v4HC3ci" rel="noopener">
+          Get the digital program
+        </a>
+        <a class="btn" href="https://www.redonkulas.com" rel="noopener">
+          Visit Redonkulas
+        </a>
+        <a class="btn" href="https://www.youtube.com/@redonkulaspopp" rel="noopener">
+          Watch Terrence
+        </a>
+      </div>
+    </div>
+  </section>
+
   {categories.map((cat) => (
     <section>
       <h2>{cat.name}</h2>
@@ -91,6 +118,7 @@ const categories = [
 </Base>
 
 <style>
+  .featured { border-color: var(--accent); }
   .resource { color: var(--text); display: block; }
   .resource:hover { text-decoration: none; border-color: var(--accent); }
   .resource h3 { margin-top: 0; }

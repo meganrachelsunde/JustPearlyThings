@@ -4,33 +4,36 @@ import EmailSignup from "../components/EmailSignup.astro";
 import { DONATION_RAILS } from "../config";
 ---
 
-<Base title="Transparency" description="Where donations go, who runs the entities that receive them, and where every dollar is accounted for.">
-  <span class="pill">The books</span>
+<Base title="Transparency" description="What is verified about contributions to The Audacity Network, what Pearl has said they fund, and what still requires confirmation.">
+  <span class="pill">What is verified</span>
   <h1>Transparency</h1>
   <p class="lede">
-    A donation is a claim on future work. This page is the record of what that claim
-    buys, who is legally responsible for spending it, and how those spending decisions
-    are checked.
+    A contribution is a claim on future work. This page separates what the network's
+    published terms confirm from Pearl's stated funding priorities. It does not promise
+    tax treatment, earmarking, or financial controls that have not been documented.
   </p>
 
   <h2>The entity that receives donations</h2>
   <div class="card">
     <p>
-      <strong>JustPearlyThings, LLC</strong> — a limited liability company organized under
-      U.S. state law, doing business as The Audacity Network. Donations made through this
-      site or through <a href="https://theaudacitynetwork.com" rel="noopener">theaudacitynetwork.com</a>
-      are processed by Stripe and received by JustPearlyThings, LLC.
+      The Audacity Network's published
+      <a href="https://www.theaudacitynetwork.com/terms" rel="noopener">Terms of Service</a>
+      identify the operator as <strong>JustPearlyThings, LLC, trading as The Audacity
+      Network</strong>, and identify Stripe as the card processor.
     </p>
     <p class="notice" style="margin-top: 1rem;">
-      <strong>Not tax-deductible.</strong> An LLC is not a 501(c)(3). Contributions here
-      are not tax-deductible. If a separate 501(c)(3) is incorporated later — which is
-      the intended direction — its EIN, IRS determination letter, and scope will be
-      posted on this page in writing, and the donate page will state clearly which
-      entity a given contribution routes to.
+      <strong>No tax-deduction claim is made here.</strong> The current support page
+      identifies an LLC, not a 501(c)(3). Donors should not treat a contribution as
+      tax-deductible unless the checkout identifies a qualified charitable recipient
+      and supplies the required receipt.
     </p>
   </div>
 
-  <h2>Where the money goes</h2>
+  <h2>Pearl's stated funding priorities</h2>
+  <p class="muted">
+    These priorities come from Pearl's June 2026 public explanation of the network.
+    They describe intended use; they are not restricted-fund promises.
+  </p>
   <div class="grid cols-2">
     <div class="card">
       <h3>1. Content production</h3>
@@ -58,29 +61,27 @@ import { DONATION_RAILS } from "../config";
     <div class="card">
       <h3>4. Downstream reform (contingent)</h3>
       <p class="muted">
-        Contributions above the operating cost of the reporting engine flow to
+        Pearl has said that once the content operation is stable, she wants to support
         advocates working on family-court reform — starting with
         <a href="https://www.redonkulas.com" rel="noopener">Terrence Popp</a> and
-        <strong>Second Class Citizen</strong>, his 501(c)(3) for combat veterans and
-        men inside the family-court system. This is a downstream allocation, activated
-        only when the content operation is stable.
+        <strong>Second Class Citizen</strong>. No grant amount, schedule, or restricted
+        contribution route is represented on this site until the parties confirm it.
       </p>
     </div>
   </div>
 
-  <h2>Where the money does not go</h2>
+  <h2>What the published terms confirm</h2>
   <div class="card">
     <ul class="clean">
-      <li>Not private benefit outside compensation for work performed on the show.</li>
       <li>
-        Not routed through personal accounts. Every donation flows through Stripe,
-        Cash App, or Venmo accounts registered to the LLC (or, once incorporated, to
-        the 501(c)(3)).
+        Contributions are voluntary and do not create a right to goods, services, or
+        equity unless a separate written agreement says otherwise.
       </li>
       <li>
-        Not represented as tax-deductible while the receiving entity is an LLC. When
-        that changes, this page changes first.
+        Card payments are processed by Stripe; The Audacity Network says it does not
+        store payment-card information on its servers.
       </li>
+      <li>Its published terms describe contributions as final and non-refundable except where law requires otherwise.</li>
     </ul>
   </div>
 
@@ -91,24 +92,23 @@ import { DONATION_RAILS } from "../config";
       Directly responsible for how funds are spent within the LLC.
     </p>
     <p class="muted">
-      When the 501(c)(3) is incorporated, its board of directors will be listed here
-      with names, affiliations, and the date each member joined. Pearl has stated
-      publicly that Terrence Popp is intended to be on the board.
+      Pearl has publicly discussed forming or operating a nonprofit with Terrence Popp
+      involved. This site does not identify that entity as a recipient until its legal
+      name, tax status, board, and payment route are confirmed.
     </p>
   </div>
 
-  <h2>Annual reports and financials</h2>
+  <h2>Reporting standard</h2>
   <div class="card">
     <p class="muted">
-      The first annual report will be published on this page when the LLC has a
-      completed fiscal year of donation-funded operations to report on. Once a
-      501(c)(3) is incorporated, its Form 990 will be posted here every year within
-      30 days of filing with the IRS, alongside any independently audited financial
-      statements.
+      No annual report, audit, Form 990, or event ledger has been supplied for
+      publication yet. This page will link primary documents when the responsible
+      entity provides them; it will not imply that an audit or filing exists before it does.
     </p>
     <p class="muted">
-      Until then, per-event fundraising totals and their allocations are posted on the
-      <a href="/events">events page</a> for every past event.
+      Confirmed event totals and allocations can be added to the
+      <a href="/events">events page</a> after each fundraiser. No sample totals are
+      displayed as real records.
     </p>
   </div>
 
@@ -127,26 +127,14 @@ import { DONATION_RAILS } from "../config";
     </ul>
   </div>
 
-  <h2>State charity registration</h2>
+  <h2>Questions</h2>
   <div class="card">
     <p class="muted">
-      Charity registration is required by roughly forty U.S. states before soliciting
-      donations from their residents as a nonprofit. This obligation applies once the
-      501(c)(3) is incorporated. Until then, contributions are solicited only on
-      behalf of the LLC, and registration is not required. The state-by-state
-      registration list will appear on this page in the same form Beast Philanthropy
-      publishes theirs, once the 501(c)(3) is active.
-    </p>
-  </div>
-
-  <h2>Requesting records</h2>
-  <div class="card">
-    <p class="muted">
-      For a copy of the current financial statement, donation records for a given
-      period, or the list of downstream nonprofits that have received grants (once
-      applicable), write to
+      For questions about an existing contribution or the entity shown at checkout,
+      write to
       <a href="mailto:production@theaudacitynetwork.com">production@theaudacitynetwork.com</a>
-      with the request in writing. Responses aim to be inside two business weeks.
+      with the date, amount, and payment method. Do not include a full card number or
+      other sensitive financial information.
     </p>
   </div>
 
