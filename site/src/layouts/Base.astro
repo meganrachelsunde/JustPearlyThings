@@ -173,17 +173,29 @@ const current = Astro.url.pathname;
   .site-header nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem;
+    gap: 0.35rem;
   }
 
   .site-header nav a {
-    color: var(--text-muted);
-    padding: 0.35rem 0.7rem;
+    color: #d8d1e0;
+    padding: 0.4rem 0.75rem;
     border-radius: 999px;
+    border: 1px solid transparent;
     font-size: 0.95rem;
+    font-weight: 650;
+    letter-spacing: 0.01em;
   }
-  .site-header nav a:hover { color: var(--text); text-decoration: none; background: var(--bg-raised); }
-  .site-header nav a.active { color: var(--accent); background: var(--bg-raised); }
+  .site-header nav a:hover {
+    color: var(--text);
+    text-decoration: none;
+    background: var(--bg-raised);
+    border-color: var(--border);
+  }
+  .site-header nav a.active {
+    color: var(--accent-strong);
+    background: rgba(232, 182, 76, 0.12);
+    border-color: rgba(232, 182, 76, 0.4);
+  }
 
   .btn {
     display: inline-block;
