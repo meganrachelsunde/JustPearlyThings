@@ -10,68 +10,22 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
 
 <Base title="Home" description={SITE.tagline}>
   <section class="hero">
-    <span class="pill">Independent media</span>
-    <h1>The show they couldn't cancel.</h1>
+    <span class="pill">The show</span>
+    <h1>That's what she said.</h1>
     <p class="lede">
-      Demonetized, banned, and blacklisted — still here. JustPearlyThings covers dating,
-      family, and the family court system with documentaries, daily shows, and real
-      conversations no network would touch.
+      Fathers, lawyers, judges, feminists. Sources on screen. Follow-up questions
+      actually asked. Truth does not negotiate with comfort. Claims go on the record,
+      meet the evidence, and either survive scrutiny or they don't.
     </p>
 
-    <div class="video-frame">
-      {hasVideo ? (
-        <iframe
-          src={SITE.missionVideoEmbedUrl}
-          title="Our mission"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        />
-      ) : (
-        <div class="video-placeholder">
-          <p>
-            <strong>Mission video goes here.</strong><br />
-            Add the embed URL in <code>src/config.ts</code> once Pearl records it.
-          </p>
-        </div>
-      )}
-    </div>
-
     <div class="btn-row">
-      <a class="btn primary" href={CTA.donate.url}>{CTA.donate.label}</a>
-      <a class="btn" href={CTA.membership.url} rel="noopener">{CTA.membership.label}</a>
-      <a class="btn" href="#email">Get updates</a>
+      <a class="btn primary" href="#latest">See the latest</a>
+      <a class="btn" href={CTA.membership.url} rel="noopener">Full library on Audacity</a>
+      <a class="btn" href={CTA.donate.url}>{CTA.donate.label}</a>
     </div>
   </section>
 
-  <section>
-    <h2>Where the money goes</h2>
-    <div class="grid cols-3">
-      <div class="card">
-        <h3>Making the content</h3>
-        <p class="muted">
-          Documentaries, the daily show, editors, and production — for Pearl and every
-          creator who joins the network.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Legal defense</h3>
-        <p class="muted">
-          Covering men's issues means lawsuits, demonetization, and blacklisting. Donations
-          keep the show on the air through all of it.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Fighting family court corruption</h3>
-        <p class="muted">
-          Supporting the work of advocates like Terrence Moore to expose administrative
-          violence and help fathers get a fair hearing.
-        </p>
-      </div>
-    </div>
-    <p><a href="/donate">See the full breakdown and ways to give →</a></p>
-  </section>
-
-  <section>
+  <section id="latest">
     <h2>Latest episodes</h2>
     {!live && (
       <p class="notice">
@@ -96,11 +50,116 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
     <p><a href="/watch">All the places to watch →</a></p>
   </section>
 
+  <section class="join-strip">
+    <div class="join-copy">
+      <span class="pill">The full library</span>
+      <h2>Join The Audacity Network.</h2>
+      <p>
+        Every episode, live streams, exclusive documentaries, and the community
+        around them. This site is the public front door; the show itself lives on
+        Audacity.
+      </p>
+      <div class="btn-row">
+        <a class="btn primary" href={CTA.membership.url} rel="noopener">{CTA.membership.label}</a>
+        <a class="btn" href="/about">What this network is</a>
+      </div>
+    </div>
+    <div class="video-frame">
+      {hasVideo ? (
+        <iframe
+          src={SITE.missionVideoEmbedUrl}
+          title="Why this network exists"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        />
+      ) : (
+        <div class="video-placeholder">
+          <p>
+            <strong>Mission video slot.</strong><br />
+            Add the YouTube embed URL in <code>src/config.ts</code> once Pearl records the
+            one-take on why this network exists.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section>
+    <h2>Where the money goes</h2>
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Content</h3>
+        <p class="muted">
+          Editors, producers, and writers get paid whether or not any single piece
+          performs. Viewer funding is what lets a documentary get made when it
+          wouldn't earn back its cost on ads alone.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Legal</h3>
+        <p class="muted">
+          Covering institutions honestly invites lawsuits — meritorious or not.
+          Budgeting for defense keeps the reporting on the record instead of
+          quietly retracted.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Fieldwork</h3>
+        <p class="muted">
+          Travel and time on the ground. Interviews with parents inside a
+          family-court process, or communities inside a system that failed them,
+          don't come to a studio.
+        </p>
+      </div>
+    </div>
+    <p><a href="/donate">Full breakdown and ways to give →</a> · <a href="/transparency">Transparency policy →</a></p>
+  </section>
+
   <EmailSignup />
 </Base>
 
 <style>
-  .hero { margin-bottom: 3rem; }
+  .hero {
+    margin: 1.5rem 0 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  /* Short iridescent keyline under the hero, like a lower-third on a broadcast. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, #e6cb90 0%, #d9b877 55%, var(--violet, #a678d6) 100%);
+    border-radius: 2px;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .hero .lede { max-width: 40rem; }
+  .join-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 2rem;
+    background: var(--surface, rgba(255,255,255,0.02));
+    border: 1px solid var(--border, rgba(255,255,255,0.08));
+    border-radius: 12px;
+    margin: 3rem 0;
+  }
+  .join-copy .pill { margin-bottom: 0.75rem; }
+  .join-copy h2 { margin-top: 0.25rem; }
+  .join-strip .video-frame { margin: 0; }
+  @media (max-width: 720px) {
+    .join-strip { grid-template-columns: 1fr; padding: 1.5rem; }
+  }
   .episode {
     display: flex;
     gap: 1rem;

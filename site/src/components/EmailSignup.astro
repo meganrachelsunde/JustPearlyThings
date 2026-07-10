@@ -9,18 +9,26 @@ const live = EMAIL.formAction.length > 0;
 ---
 
 <section class:list={["signup", { compact }]} id="email">
-  <h2>{EMAIL.heading}</h2>
-  <p class="muted">{EMAIL.blurb}</p>
   {live ? (
-    <form action={EMAIL.formAction} method="post" target="_blank">
-      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
-      <button type="submit" class="btn primary">Join the list</button>
-    </form>
+    <>
+      <h2>{EMAIL.heading}</h2>
+      <p class="muted">{EMAIL.blurb}</p>
+      <form action={EMAIL.formAction} method="post" target="_blank">
+        <input type="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+        <button type="submit" class="btn primary">Join the list</button>
+      </form>
+    </>
   ) : (
-    <form onsubmit="return false;" aria-disabled="true">
-      <input type="email" placeholder="you@example.com" disabled />
-      <button type="submit" class="btn" disabled>Coming soon</button>
-    </form>
+    <>
+      <h2>Tell Pearl what to build next.</h2>
+      <p class="muted">
+        The email list is not connected yet. Pearl's current audience survey asks what
+        you watch, what you want next, and which city she should visit.
+      </p>
+      <a class="btn primary" href={EMAIL.fallbackSurveyUrl} rel="noopener" target="_blank">
+        Take the audience survey
+      </a>
+    </>
   )}
 </section>
 
@@ -55,5 +63,4 @@ const live = EMAIL.formAction.length > 0;
     outline: 2px solid var(--accent);
     border-color: transparent;
   }
-  button[disabled] { opacity: 0.55; cursor: not-allowed; }
 </style>

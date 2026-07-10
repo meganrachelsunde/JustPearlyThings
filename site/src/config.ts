@@ -4,11 +4,15 @@
  */
 
 export const SITE = {
-  name: "JustPearlyThings",
-  tagline: "Independent media on dating, family, and the family court system.",
+  // The site is branded as Pearl herself; "JustPearlyThings" stays the name
+  // of the show, and "JustPearlyThings, LLC" the legal entity.
+  name: "Pearl Davis",
+  // Used for meta descriptions and link previews, not shown on the page.
+  tagline: "The official home of Pearl Davis — the show, the sources, and The Audacity Network.",
   domain: "hannahpearldavis.com",
-  // TODO before launch: replace with the real mission video (YouTube/Rumble embed URL).
-  missionVideoEmbedUrl: "",
+  // Pearl's June 2026 explanation of why she built the network and what it funds.
+  // Replace this when she records the shorter dedicated homepage version.
+  missionVideoEmbedUrl: "https://www.youtube.com/embed/5WNuQ2gWvwc",
 };
 
 export const CTA = {
@@ -33,7 +37,7 @@ export const CTA = {
 
 export const DONATION_RAILS = {
   // Card donations go through the existing Stripe flow on The Audacity Network.
-  card: "https://theaudacitynetwork.com",
+  card: "https://theaudacitynetwork.com/support-us",
   cashApp: "$pearlythings",
   venmo: "Just_pearlythings",
   /**
@@ -63,10 +67,19 @@ export const SOCIALS = [
   { name: "Apple Podcasts (Pearl Daily)", url: "https://podcasts.apple.com/us/podcast/pearl-daily/id1715060113" },
 ];
 
-export const APPS = [
+/**
+ * DO NOT LINK THESE until the network ships an app for its current platform.
+ *
+ * The store apps (bundle id tv.uscreen.theaudacitynetwork) were built for
+ * Uscreen, the network's previous video platform. The current
+ * theaudacitynetwork.com runs on a different system with its own accounts,
+ * so logins created on the new site fail inside the old app. Sending
+ * visitors there produces a broken first experience.
+ */
+export const LEGACY_APPS = [
   {
     name: "iOS — The Audacity Network",
-    url: "https://apps.apple.com/gb/app/the-audacity-network/id6480478398",
+    url: "https://apps.apple.com/us/app/the-audacity-network/id6480478398",
   },
   {
     name: "Android — The Audacity Network",
@@ -86,7 +99,8 @@ export const EMAIL = {
    * While empty, the signup form stores nothing and shows a "coming soon" note.
    */
   formAction: "",
-  heading: "Never lose touch",
+  heading: "Email is the only channel we own.",
   blurb:
-    "Platforms ban, demonetize, and delete. Email doesn't. Join the list and you'll always know where to find the show.",
+    "Platforms decide who sees what and can end distribution overnight. An email list has no algorithm and no intermediary between us and you.",
+  fallbackSurveyUrl: "https://forms.gle/8zdVoukc5Nb9i5nA8",
 };

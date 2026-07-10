@@ -1,0 +1,13 @@
+{
+  "name": "Pearl Davis",
+  "short_name": "Pearl",
+  "description": "The official home of Pearl Davis — the show, the sources, and The Audacity Network.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0d09",
+  "theme_color": "#0f0d09",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

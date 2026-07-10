@@ -1,0 +1,147 @@
+---
+import Base from "../layouts/Base.astro";
+import EmailSignup from "../components/EmailSignup.astro";
+import { DONATION_RAILS } from "../config";
+---
+
+<Base title="Transparency" description="What is verified about contributions to The Audacity Network, what Pearl has said they fund, and what still requires confirmation.">
+  <span class="pill">What is verified</span>
+  <h1>Transparency</h1>
+  <p class="lede">
+    A contribution is a claim on future work. This page separates what the network's
+    published terms confirm from Pearl's stated funding priorities. It does not promise
+    tax treatment, earmarking, or financial controls that have not been documented.
+  </p>
+
+  <h2>The entity that receives donations</h2>
+  <div class="card">
+    <p>
+      The Audacity Network's published
+      <a href="https://www.theaudacitynetwork.com/terms" rel="noopener">Terms of Service</a>
+      identify the operator as <strong>JustPearlyThings, LLC, trading as The Audacity
+      Network</strong>, and identify Stripe as the card processor.
+    </p>
+    <p class="notice" style="margin-top: 1rem;">
+      <strong>No tax-deduction claim is made here.</strong> The current support page
+      identifies an LLC, not a 501(c)(3). Donors should not treat a contribution as
+      tax-deductible unless the checkout identifies a qualified charitable recipient
+      and supplies the required receipt.
+    </p>
+  </div>
+
+  <h2>Pearl's stated funding priorities</h2>
+  <p class="muted">
+    These priorities come from Pearl's June 2026 public explanation of the network.
+    They describe intended use; they are not restricted-fund promises.
+  </p>
+  <div class="grid cols-2">
+    <div class="card">
+      <h3>1. Content production</h3>
+      <p class="muted">
+        Documentaries, daily show, editors, producers, camera and writing. This is the
+        priority allocation and it isn't close — no other line item exists if this one
+        stops.
+      </p>
+    </div>
+    <div class="card">
+      <h3>2. Legal defense</h3>
+      <p class="muted">
+        Reporting critically on institutions invites lawsuits, meritorious or not.
+        Legal defense is budgeted so the reporting doesn't have to be retracted to
+        avoid it.
+      </p>
+    </div>
+    <div class="card">
+      <h3>3. Fieldwork</h3>
+      <p class="muted">
+        Travel and filming — the reporting that requires being physically somewhere,
+        with cameras, on someone else's schedule. Receipts are kept and categorized.
+      </p>
+    </div>
+    <div class="card">
+      <h3>4. Downstream reform (contingent)</h3>
+      <p class="muted">
+        Pearl has said that once the content operation is stable, she wants to support
+        advocates working on family-court reform — starting with
+        <a href="https://www.redonkulas.com" rel="noopener">Terrence Popp</a> and
+        <strong>Second Class Citizen</strong>. No grant amount, schedule, or restricted
+        contribution route is represented on this site until the parties confirm it.
+      </p>
+    </div>
+  </div>
+
+  <h2>What the published terms confirm</h2>
+  <div class="card">
+    <ul class="clean">
+      <li>
+        Contributions are voluntary and do not create a right to goods, services, or
+        equity unless a separate written agreement says otherwise.
+      </li>
+      <li>
+        Card payments are processed by Stripe; The Audacity Network says it does not
+        store payment-card information on its servers.
+      </li>
+      <li>Its published terms describe contributions as final and non-refundable except where law requires otherwise.</li>
+    </ul>
+  </div>
+
+  <h2>Who is accountable</h2>
+  <div class="card">
+    <p>
+      <strong>Pearl Davis</strong> — founder and operator of JustPearlyThings, LLC.
+      Directly responsible for how funds are spent within the LLC.
+    </p>
+    <p class="muted">
+      Pearl has publicly discussed forming or operating a nonprofit with Terrence Popp
+      involved. This site does not identify that entity as a recipient until its legal
+      name, tax status, board, and payment route are confirmed.
+    </p>
+  </div>
+
+  <h2>Reporting standard</h2>
+  <div class="card">
+    <p class="muted">
+      No annual report, audit, Form 990, or event ledger has been supplied for
+      publication yet. This page will link primary documents when the responsible
+      entity provides them; it will not imply that an audit or filing exists before it does.
+    </p>
+    <p class="muted">
+      Confirmed event totals and allocations can be added to the
+      <a href="/events">events page</a> after each fundraiser. No sample totals are
+      displayed as real records.
+    </p>
+  </div>
+
+  <h2>Rails and processors</h2>
+  <div class="card">
+    <ul class="clean">
+      <li><strong>Card donations</strong> — processed by Stripe on The Audacity Network.</li>
+      <li><strong>Cash App</strong> — <code>{DONATION_RAILS.cashApp}</code></li>
+      <li><strong>Venmo</strong> — <code>{DONATION_RAILS.venmo}</code></li>
+      <li>
+        <strong>Cryptocurrency</strong> — addresses are being re-verified against an
+        official source and will appear on the donate page only after Pearl personally
+        confirms them. Sending crypto to an unverified address is irreversible; the
+        engineering standard here is 100% or nothing.
+      </li>
+    </ul>
+  </div>
+
+  <h2>Questions</h2>
+  <div class="card">
+    <p class="muted">
+      For questions about an existing contribution or the entity shown at checkout,
+      write to
+      <a href="mailto:production@theaudacitynetwork.com">production@theaudacitynetwork.com</a>
+      with the date, amount, and payment method. Do not include a full card number or
+      other sensitive financial information.
+    </p>
+  </div>
+
+  <EmailSignup compact />
+</Base>
+
+<style>
+  ul.clean { padding-left: 1.2rem; margin: 0; }
+  ul.clean li { margin: 0.35rem 0; }
+</style>
