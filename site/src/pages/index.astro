@@ -119,10 +119,26 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
 </Base>
 
 <style>
-  .hero { margin-bottom: 3rem; }
+  .hero {
+    margin: 1.5rem 0 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  /* Short red keyline under the hero, like a lower-third on a broadcast. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 120px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
   .hero h1 {
-    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
-    line-height: 1.02;
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    line-height: 1;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
   }

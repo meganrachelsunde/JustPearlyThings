@@ -31,6 +31,12 @@ const current = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="site-header">
@@ -75,17 +81,22 @@ const current = Astro.url.pathname;
 
 <style is:global>
   :root {
-    --bg: #0d0c0f;
-    --bg-raised: #17151b;
-    --bg-card: #1d1a22;
-    --border: #2c2833;
-    --text: #f2eef7;
-    --text-muted: #a79fb3;
-    --accent: #e8b64c;
-    --accent-strong: #f4c964;
-    --accent-ink: #201703;
+    /* Pearl brand: signal red on near-black, matching her channel art
+       and The Audacity Network. No purple, no gold. */
+    --bg: #0a0a0b;
+    --bg-raised: #141416;
+    --bg-card: #17171a;
+    --border: #29292e;
+    --text: #f7f6f5;
+    --text-muted: #a3a1a6;
+    --accent: #e8352e;
+    --accent-strong: #ff4b43;
+    --accent-ink: #ffffff;
+    --accent-glow: rgba(232, 53, 46, 0.14);
     --radius: 14px;
     --max: 1080px;
+    --font-display: "Montserrat", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   }
 
   * {
@@ -98,24 +109,30 @@ const current = Astro.url.pathname;
 
   body {
     margin: 0;
-    background: var(--bg);
     color: var(--text);
-    font-family: "Avenir Next", Avenir, "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    /* A faint red wash at the top so the page reads "live studio",
+       not flat gray. */
+    background:
+      radial-gradient(1200px 500px at 70% -10%, var(--accent-glow), transparent 65%),
+      var(--bg);
+    background-attachment: fixed;
   }
 
   h1, h2, h3 {
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+    font-family: var(--font-display);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
   }
 
-  h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 0.5rem; }
-  h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 2.5rem 0 0.75rem; }
-  h3 { font-size: 1.15rem; margin: 1.5rem 0 0.5rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 0.5rem; font-weight: 900; }
+  h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: 2.5rem 0 0.75rem; font-weight: 800; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; font-weight: 700; }
 
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { color: var(--accent-strong); text-decoration: underline; }
+  a { color: var(--accent-strong); text-decoration: none; }
+  a:hover { color: #ff6a63; text-decoration: underline; }
 
   main {
     max-width: var(--max);
@@ -144,7 +161,7 @@ const current = Astro.url.pathname;
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
-    background: rgba(13, 12, 15, 0.92);
+    background: rgba(10, 10, 11, 0.9);
     backdrop-filter: blur(8px);
     z-index: 10;
   }
@@ -165,9 +182,11 @@ const current = Astro.url.pathname;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--accent-strong), #b8862a);
-    color: var(--accent-ink);
-    font-weight: 800;
+    background: radial-gradient(circle at 35% 30%, var(--accent-strong), #a31510);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 900;
+    box-shadow: 0 0 14px rgba(232, 53, 46, 0.45);
   }
 
   .site-header nav {
@@ -177,7 +196,7 @@ const current = Astro.url.pathname;
   }
 
   .site-header nav a {
-    color: #d8d1e0;
+    color: #d9d7db;
     padding: 0.4rem 0.75rem;
     border-radius: 999px;
     border: 1px solid transparent;
@@ -193,8 +212,8 @@ const current = Astro.url.pathname;
   }
   .site-header nav a.active {
     color: var(--accent-strong);
-    background: rgba(232, 182, 76, 0.12);
-    border-color: rgba(232, 182, 76, 0.4);
+    background: rgba(232, 53, 46, 0.12);
+    border-color: rgba(232, 53, 46, 0.45);
   }
 
   .btn {
@@ -210,11 +229,12 @@ const current = Astro.url.pathname;
   .btn:hover { text-decoration: none; transform: translateY(-1px); background: var(--bg-raised); color: var(--text); }
 
   .btn.primary {
-    background: linear-gradient(135deg, var(--accent-strong), #cf9a30);
+    background: linear-gradient(135deg, var(--accent-strong), #c11f19);
     border-color: transparent;
-    color: var(--accent-ink);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(232, 53, 46, 0.3);
   }
-  .btn.primary:hover { color: var(--accent-ink); filter: brightness(1.05); }
+  .btn.primary:hover { color: #fff; filter: brightness(1.08); }
 
   .btn-row {
     display: flex;
@@ -224,11 +244,17 @@ const current = Astro.url.pathname;
   }
 
   .card {
-    background: var(--bg-card);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0)) , var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1.4rem;
+    transition: border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
   }
+  .card:hover {
+    border-color: rgba(232, 53, 46, 0.45);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+  a.card:hover { transform: translateY(-2px); }
 
   .grid {
     display: grid;
@@ -239,13 +265,14 @@ const current = Astro.url.pathname;
 
   .pill {
     display: inline-block;
+    font-family: var(--font-display);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    background: rgba(232, 182, 76, 0.12);
-    border: 1px solid rgba(232, 182, 76, 0.35);
+    letter-spacing: 0.1em;
+    color: var(--accent-strong);
+    background: rgba(232, 53, 46, 0.12);
+    border: 1px solid rgba(232, 53, 46, 0.4);
     padding: 0.2rem 0.65rem;
     border-radius: 999px;
     margin-bottom: 0.75rem;
