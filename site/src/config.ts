@@ -67,8 +67,10 @@ export const SOCIALS = [
 
 export const APPS = [
   {
+    // Listed under "The Audacity Network", not Pearl's name — searching the
+    // App Store for "Pearl Davis" finds nothing, so link directly.
     name: "iOS — The Audacity Network",
-    url: "https://apps.apple.com/gb/app/the-audacity-network/id6480478398",
+    url: "https://apps.apple.com/us/app/the-audacity-network/id6480478398",
   },
   {
     name: "Android — The Audacity Network",
