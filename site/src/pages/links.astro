@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { CTA, SOCIALS, APPS } from "../config";
+import { CTA, SOCIALS } from "../config";
 
 const primary = [
   { label: "Donate", url: "/donate" },
@@ -23,9 +23,6 @@ const primary = [
       ))}
       {SOCIALS.map((s) => (
         <a class="btn wide" href={s.url} rel="noopener">{s.name}</a>
-      ))}
-      {APPS.map((a) => (
-        <a class="btn wide" href={a.url} rel="noopener">{a.name}</a>
       ))}
     </div>
   </div>

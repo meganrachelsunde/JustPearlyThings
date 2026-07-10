@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import EmailSignup from "../components/EmailSignup.astro";
-import { CTA, SOCIALS, APPS } from "../config";
+import { CTA, SOCIALS } from "../config";
 
 const videoPlatforms = SOCIALS.filter((s) =>
   ["YouTube", "Rumble"].some((n) => s.name.startsWith(n))
@@ -24,10 +24,11 @@ const podcastPlatforms = SOCIALS.filter((s) =>
     <p class="muted">{CTA.membership.blurb}</p>
     <div class="btn-row" style="margin-bottom:0;">
       <a class="btn primary" href={CTA.membership.url} rel="noopener">Join now</a>
-      {APPS.map((app) => (
-        <a class="btn" href={app.url} rel="noopener">{app.name.split(" — ")[0]} app</a>
-      ))}
     </div>
+    <p class="muted small" style="margin-bottom:0;">
+      Works in any browser on phone, tablet, or TV. Mobile apps are being rebuilt for
+      the network's current platform and will be linked here when logins work.
+    </p>
   </div>
 
   <h2>Free episodes and clips</h2>

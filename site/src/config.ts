@@ -65,10 +65,17 @@ export const SOCIALS = [
   { name: "Apple Podcasts (Pearl Daily)", url: "https://podcasts.apple.com/us/podcast/pearl-daily/id1715060113" },
 ];
 
-export const APPS = [
+/**
+ * DO NOT LINK THESE until the network ships an app for its current platform.
+ *
+ * The store apps (bundle id tv.uscreen.theaudacitynetwork) were built for
+ * Uscreen, the network's previous video platform. The current
+ * theaudacitynetwork.com runs on a different system with its own accounts,
+ * so logins created on the new site fail inside the old app. Sending
+ * visitors there produces a broken first experience.
+ */
+export const LEGACY_APPS = [
   {
-    // Listed under "The Audacity Network", not Pearl's name — searching the
-    // App Store for "Pearl Davis" finds nothing, so link directly.
     name: "iOS — The Audacity Network",
     url: "https://apps.apple.com/us/app/the-audacity-network/id6480478398",
   },
