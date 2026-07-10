@@ -43,7 +43,18 @@ export type PastEvent = {
 /** Pearl's current audience survey asks for city/state and event interests. */
 export const AUDIENCE_SURVEY_URL = "https://forms.gle/8zdVoukc5Nb9i5nA8";
 
-export const upcoming: UpcomingEvent[] = [];
+export const upcoming: UpcomingEvent[] = [
+  {
+    title:
+      "NYC private dining fundraiser with Pearl Davis, Terrence Popp, and Christine Grace Smith",
+    date: "September 11, 2026",
+    format: "in-person",
+    description:
+      "A private dinner in New York City raising money for male suicide prevention and a plan of action on the family-court system. General admission is $1,500 (steakhouse dinner); VIP is $2,000 with premium seating and behind-the-scenes time with Pearl. Attendees are screened, and security measures are in place. The next day Pearl debates NotSoErudite (Kyla Turner). Questions: doug@theaudacitynetwork.com.",
+    rsvpUrl:
+      "https://www.theaudacitynetwork.com/event/nyc-private-dining-event-sept-11-with-pearl-davis-terrance-popp-and-christine-grace-smith",
+  },
+];
 
 export const past: PastEvent[] = [
   {

@@ -36,7 +36,7 @@ import { upcoming, past, AUDIENCE_SURVEY_URL } from "../data/events";
           <p>{ev.description}</p>
           <div class="btn-row" style="margin-bottom:0;">
             {ev.rsvpUrl && (
-              <a class="btn" href={ev.rsvpUrl} rel="noopener" target="_blank">RSVP</a>
+              <a class="btn primary" href={ev.rsvpUrl} rel="noopener" target="_blank">Tickets and details</a>
             )}
             {ev.streamUrl && (
               <a class="btn primary" href={ev.streamUrl} rel="noopener">Watch live</a>
