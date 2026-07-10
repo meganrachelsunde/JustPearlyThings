@@ -81,18 +81,19 @@ const current = Astro.url.pathname;
 
 <style is:global>
   :root {
-    /* Pearl brand: signal red on near-black, matching her channel art
-       and The Audacity Network. No purple, no gold. */
-    --bg: #0a0a0b;
-    --bg-raised: #141416;
-    --bg-card: #17171a;
-    --border: #29292e;
-    --text: #f7f6f5;
-    --text-muted: #a3a1a6;
-    --accent: #e8352e;
-    --accent-strong: #ff4b43;
-    --accent-ink: #ffffff;
-    --accent-glow: rgba(232, 53, 46, 0.14);
+    /* Pearl luster on ink: warm near-black base, with an iridescent
+       accent that moves ivory -> blush -> ice blue, like an actual pearl. */
+    --bg: #0c0a0d;
+    --bg-raised: #161318;
+    --bg-card: #1a161c;
+    --border: #2c2730;
+    --text: #f6f3f4;
+    --text-muted: #a8a0a9;
+    --accent: #e9b7c4;
+    --accent-strong: #f4cdd8;
+    --accent-ink: #271820;
+    --accent-glow: rgba(233, 183, 196, 0.09);
+    --pearl-sheen: linear-gradient(135deg, #f8ece2 0%, #f0c9d6 52%, #ccd3ee 100%);
     --radius: 14px;
     --max: 1080px;
     --font-display: "Montserrat", "Avenir Next", "Segoe UI", system-ui, sans-serif;
@@ -113,10 +114,11 @@ const current = Astro.url.pathname;
     font-family: var(--font-body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    /* A faint red wash at the top so the page reads "live studio",
+    /* A faint pearlescent wash at the top so the page has depth,
        not flat gray. */
     background:
-      radial-gradient(1200px 500px at 70% -10%, var(--accent-glow), transparent 65%),
+      radial-gradient(1100px 480px at 72% -12%, var(--accent-glow), transparent 65%),
+      radial-gradient(900px 420px at 12% -8%, rgba(204, 211, 238, 0.07), transparent 60%),
       var(--bg);
     background-attachment: fixed;
   }
@@ -132,7 +134,7 @@ const current = Astro.url.pathname;
   h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; font-weight: 700; }
 
   a { color: var(--accent-strong); text-decoration: none; }
-  a:hover { color: #ff6a63; text-decoration: underline; }
+  a:hover { color: #fbe3ea; text-decoration: underline; }
 
   main {
     max-width: var(--max);
@@ -161,7 +163,7 @@ const current = Astro.url.pathname;
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
-    background: rgba(10, 10, 11, 0.9);
+    background: rgba(12, 10, 13, 0.9);
     backdrop-filter: blur(8px);
     z-index: 10;
   }
@@ -182,11 +184,12 @@ const current = Astro.url.pathname;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--accent-strong), #a31510);
-    color: #fff;
+    /* Pearl orb: bright highlight off-center, cool shadow at the rim. */
+    background: radial-gradient(circle at 32% 28%, #fdf6ee 0%, #f0c9d6 45%, #9ba4cf 100%);
+    color: var(--accent-ink);
     font-family: var(--font-display);
     font-weight: 900;
-    box-shadow: 0 0 14px rgba(232, 53, 46, 0.45);
+    box-shadow: 0 0 14px rgba(233, 183, 196, 0.35);
   }
 
   .site-header nav {
@@ -196,7 +199,7 @@ const current = Astro.url.pathname;
   }
 
   .site-header nav a {
-    color: #d9d7db;
+    color: #dcd6dc;
     padding: 0.4rem 0.75rem;
     border-radius: 999px;
     border: 1px solid transparent;
@@ -212,8 +215,8 @@ const current = Astro.url.pathname;
   }
   .site-header nav a.active {
     color: var(--accent-strong);
-    background: rgba(232, 53, 46, 0.12);
-    border-color: rgba(232, 53, 46, 0.45);
+    background: rgba(233, 183, 196, 0.1);
+    border-color: rgba(233, 183, 196, 0.4);
   }
 
   .btn {
@@ -229,12 +232,12 @@ const current = Astro.url.pathname;
   .btn:hover { text-decoration: none; transform: translateY(-1px); background: var(--bg-raised); color: var(--text); }
 
   .btn.primary {
-    background: linear-gradient(135deg, var(--accent-strong), #c11f19);
+    background: var(--pearl-sheen);
     border-color: transparent;
-    color: #fff;
-    box-shadow: 0 4px 18px rgba(232, 53, 46, 0.3);
+    color: var(--accent-ink);
+    box-shadow: 0 4px 18px rgba(233, 183, 196, 0.22);
   }
-  .btn.primary:hover { color: #fff; filter: brightness(1.08); }
+  .btn.primary:hover { color: var(--accent-ink); filter: brightness(1.05); }
 
   .btn-row {
     display: flex;
@@ -251,7 +254,7 @@ const current = Astro.url.pathname;
     transition: border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
   }
   .card:hover {
-    border-color: rgba(232, 53, 46, 0.45);
+    border-color: rgba(233, 183, 196, 0.45);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   }
   a.card:hover { transform: translateY(-2px); }
@@ -271,8 +274,8 @@ const current = Astro.url.pathname;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--accent-strong);
-    background: rgba(232, 53, 46, 0.12);
-    border: 1px solid rgba(232, 53, 46, 0.4);
+    background: rgba(233, 183, 196, 0.1);
+    border: 1px solid rgba(233, 183, 196, 0.35);
     padding: 0.2rem 0.65rem;
     border-radius: 999px;
     margin-bottom: 0.75rem;

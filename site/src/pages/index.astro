@@ -125,7 +125,7 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
     border-bottom: 1px solid var(--border);
     position: relative;
   }
-  /* Short red keyline under the hero, like a lower-third on a broadcast. */
+  /* Short iridescent keyline under the hero, like a lower-third on a broadcast. */
   .hero::after {
     content: "";
     position: absolute;
@@ -133,7 +133,7 @@ const hasVideo = SITE.missionVideoEmbedUrl.length > 0;
     bottom: -1px;
     width: 120px;
     height: 3px;
-    background: var(--accent);
+    background: var(--pearl-sheen, var(--accent));
     border-radius: 2px;
   }
   .hero h1 {
