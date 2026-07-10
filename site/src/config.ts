@@ -5,7 +5,8 @@
 
 export const SITE = {
   name: "JustPearlyThings",
-  tagline: "Independent media on dating, family, and the family court system.",
+  // Used for meta descriptions and link previews, not shown on the page.
+  tagline: "The public home of Pearl Davis — the show, the sources, and The Audacity Network.",
   domain: "hannahpearldavis.com",
   // Pearl's June 2026 explanation of why she built the network and what it funds.
   // Replace this when she records the shorter dedicated homepage version.
