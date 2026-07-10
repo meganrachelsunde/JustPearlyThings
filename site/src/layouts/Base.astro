@@ -39,6 +39,17 @@ const current = Astro.url.pathname;
     />
   </head>
   <body>
+    <div class="pearl-field" aria-hidden="true">
+      <span class="floater f1">P</span>
+      <span class="floater f2">P</span>
+      <span class="floater f3">P</span>
+      <span class="floater f4">P</span>
+      <span class="floater f5">P</span>
+      <span class="floater f6">P</span>
+      <span class="orb o1"></span>
+      <span class="orb o2"></span>
+      <span class="orb o3"></span>
+    </div>
     <header class="site-header">
       <a class="brand" href="/">
         <span class="brand-mark">P</span>
@@ -92,6 +103,9 @@ const current = Astro.url.pathname;
     --accent-strong: #ecd39a;
     --accent-ink: #241a08;
     --accent-glow: rgba(217, 184, 119, 0.1);
+    /* Secondary hue: soft violet, used in glows and gradient tails. */
+    --violet: #a678d6;
+    --violet-glow: rgba(146, 96, 194, 0.12);
     --pearl-sheen: linear-gradient(135deg, #f8eed6 0%, #e6cb90 55%, #c9a55c 100%);
     --radius: 14px;
     --max: 1080px;
@@ -113,11 +127,12 @@ const current = Astro.url.pathname;
     font-family: var(--font-body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    /* A faint candlelit gold wash at the top so the page has depth,
-       not flat gray. */
+    /* Candlelit gold at the top right, a soft violet bloom at the left,
+       so the page has depth instead of flat gray. */
     background:
       radial-gradient(1100px 480px at 72% -12%, var(--accent-glow), transparent 65%),
-      radial-gradient(900px 420px at 12% -8%, rgba(248, 238, 214, 0.05), transparent 60%),
+      radial-gradient(950px 520px at 8% 4%, var(--violet-glow), transparent 62%),
+      radial-gradient(800px 600px at 92% 78%, rgba(146, 96, 194, 0.07), transparent 60%),
       var(--bg);
     background-attachment: fixed;
   }
@@ -231,12 +246,28 @@ const current = Astro.url.pathname;
   .btn:hover { text-decoration: none; transform: translateY(-1px); background: var(--bg-raised); color: var(--text); }
 
   .btn.primary {
+    position: relative;
+    overflow: hidden;
     background: var(--pearl-sheen);
     border-color: transparent;
     color: var(--accent-ink);
     box-shadow: 0 4px 18px rgba(217, 184, 119, 0.22);
   }
   .btn.primary:hover { color: var(--accent-ink); filter: brightness(1.05); }
+  /* Light sweep across gold buttons on hover. */
+  .btn.primary::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+    transform: skewX(-18deg);
+    transition: left 450ms ease;
+    pointer-events: none;
+  }
+  .btn.primary:hover::after { left: 130%; }
 
   .btn-row {
     display: flex;
@@ -357,5 +388,62 @@ const current = Astro.url.pathname;
     text-align: center;
     padding: 1rem;
     color: var(--text-muted);
+  }
+
+  /* ---- Floating pearl stamps -------------------------------------- */
+  .pearl-field {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .pearl-field .floater {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-weight: 900;
+    color: rgba(36, 26, 8, 0.75);
+    background: radial-gradient(circle at 32% 28%, #fdf6e3 0%, #e6cb90 45%, #a8813c 100%);
+    box-shadow: 0 0 22px rgba(217, 184, 119, 0.28);
+    opacity: 0.16;
+    animation: drift 22s ease-in-out infinite alternate;
+  }
+
+  /* Soft out-of-focus orbs, two of them violet. */
+  .pearl-field .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(26px);
+    opacity: 0.2;
+    animation: drift 26s ease-in-out infinite alternate;
+  }
+
+  .floater.f1 { width: 54px; height: 54px; font-size: 26px; top: 14%; left: 5%;  animation-duration: 24s; }
+  .floater.f2 { width: 34px; height: 34px; font-size: 16px; top: 32%; left: 88%; animation-duration: 19s; animation-delay: -6s; }
+  .floater.f3 { width: 26px; height: 26px; font-size: 12px; top: 66%; left: 10%; animation-duration: 27s; animation-delay: -12s; }
+  .floater.f4 { width: 44px; height: 44px; font-size: 21px; top: 78%; left: 80%; animation-duration: 21s; animation-delay: -3s; }
+  .floater.f5 { width: 20px; height: 20px; font-size: 10px; top: 8%;  left: 62%; animation-duration: 17s; animation-delay: -9s; }
+  .floater.f6 { width: 30px; height: 30px; font-size: 14px; top: 50%; left: 46%; animation-duration: 29s; animation-delay: -15s; opacity: 0.1; }
+
+  .orb.o1 { width: 190px; height: 190px; top: 20%; left: 76%; background: var(--violet); animation-duration: 30s; }
+  .orb.o2 { width: 150px; height: 150px; top: 72%; left: 2%;  background: var(--accent); animation-duration: 24s; animation-delay: -8s; }
+  .orb.o3 { width: 120px; height: 120px; top: 44%; left: 30%; background: var(--violet); animation-duration: 34s; animation-delay: -16s; opacity: 0.14; }
+
+  @keyframes drift {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    25%  { transform: translate(22px, -30px) rotate(4deg); }
+    50%  { transform: translate(-16px, -54px) rotate(-3deg); }
+    75%  { transform: translate(28px, -22px) rotate(5deg); }
+    100% { transform: translate(-12px, 12px) rotate(-4deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pearl-field .floater,
+    .pearl-field .orb { animation: none; }
+    .btn.primary::after { display: none; }
   }
 </style>
